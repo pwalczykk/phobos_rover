@@ -5,10 +5,10 @@
     <node name="traveled_path_publisher" pkg="rover_localization" type="traveled_path_publisher" output="screen"/>
 
 <!-- GPS -->
-    <node name="gps_node" pkg="rover_gps" type="gps_node"/>
+    <node name="gps_sim_node" pkg="rover_gps_sim" type="gps_sim_node"/>
 
 <!-- IMU -->
-    <node name="imu_node" pkg="rover_imu" type="imu_node"/>
+    <node name="imu_sim_node" pkg="rover_imu_sim" type="imu_sim_node"/>
 
 <!-- STATE PUBLISHER -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
