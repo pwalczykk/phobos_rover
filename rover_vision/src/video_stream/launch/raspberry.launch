@@ -1,0 +1,35 @@
+<launch>
+    <!--param name="/camera/image/image_transport" value="theora"/-->
+    <!--param name="/camera/image/theora/optimize_for" value="0"/-->            <!-- Optymalizacja: 1 jakość ,0 szybkość -->
+    <!--param name="/camera/image/theora/target_bitrate" value="800000"/-->     <!-- docelowy bitrate, default: 800000 -->
+    <!--param name="/camera/image/theora/keyframe_frequency" value="1"/-->      <!-- Max ilość pominiętych klatek (?), default: 1 -->
+
+    <!--param name="~address" value="31.175.240.135"/-->
+    <!--param name="type" value="vp8"/-->
+
+
+    <node
+        name="test_publisher2"
+        pkg="video_stream"
+        type="test_publisher2"
+        output="screen"
+    >
+    </node>
+
+    <!--node
+        name="mjpeg_server"
+        pkg="mjpeg_server"
+        type="mjpeg_server"
+        output="screen"
+    ></node-->
+
+    <node
+        name="web_video_server"
+        pkg="web_video_server"
+        type="web_video_server"
+        output="screen"
+    >
+        <param name="server_threads" value="2"/>
+    </node>
+
+</launch>

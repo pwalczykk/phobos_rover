@@ -1,0 +1,35 @@
+<launch>
+    <node
+        name="camera1_publisher"
+        pkg="video_stream"
+        type="video_publisher"
+        args="1"
+        output="screen"
+    ></node>
+
+    <node
+        name="camera2_publisher"
+        pkg="video_stream"
+        type="video_publisher"
+        args="2"
+        output="screen"
+    ></node>
+
+    <node
+        name="camera1_subscriber"
+        pkg="video_stream"
+        type="video_subscriber"
+        output="screen"
+    >
+        <remap from="camera/image" to="camera1/image"/>
+    </node>
+
+    <node
+        name="camera2_subscriber"
+        pkg="video_stream"
+        type="video_subscriber"
+        output="screen"
+    >
+        <remap from="camera/image" to="camera2/image"/>
+    </node>
+</launch>

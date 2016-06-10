@@ -1,0 +1,10 @@
+<launch>
+    <node
+        name="video_subscriber"
+        pkg="video_stream"
+        type="video_subscriber"
+        output="screen"
+    >
+    <remap from="/camera/image" to="/rover_camera4/image_raw"/>
+    </node>
+</launch>

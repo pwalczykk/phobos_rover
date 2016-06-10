@@ -1,0 +1,50 @@
+<launch>
+    <node
+        name="camera1_publisher"
+        pkg="video_stream"
+        type="video_publisher"
+        args="1"
+        output="screen"
+    >
+        <remap from="camera1/image" to="/stereo/left/image_raw"/>
+        <remap from="camera1/camera_info" to="/stereo/left/camera_info"/>
+    </node>
+
+    <node
+        name="camera2_publisher"
+        pkg="video_stream"
+        type="video_publisher"
+        args="2"
+        output="screen"
+    >
+        <remap from="camera2/image" to="/stereo/right/image_raw"/>
+        <remap from="camera2/camera_info" to="/stereo/right/camera_info"/>
+    </node>
+
+    <node
+        name="camera1_subscriber"
+        pkg="video_stream"
+        type="video_subscriber"
+        output="screen"
+    >
+        <remap from="camera/image" to="/stereo/left/image_raw"/>
+    </node>
+
+    <node
+        name="camera2_subscriber"
+        pkg="video_stream"
+        type="video_subscriber"
+        output="screen"
+    >
+        <remap from="camera/image" to="/stereo/right/image_raw"/>
+    </node>
+
+    <node
+        name="stereo_image_proc"
+        pkg="stereo_image_proc"
+        type="stereo_image_proc"
+        ns="stereo"
+        output="screen"
+    >
+    </node>
+</launch>
