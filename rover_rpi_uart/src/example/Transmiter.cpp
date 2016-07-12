@@ -10,7 +10,7 @@
 int main(int argc, char** argv){
     // Open UART device
     int uart0_filestream = -1;
-    uart0_filestream = open("/dev/ttyAMA0", O_RDWR | O_NOCTTY | O_NDELAY);
+    uart0_filestream = open("/dev/ttyAMA0", O_WRONLY | O_NOCTTY | O_NDELAY);
     if(uart0_filestream == -1){
         printf("ERROR - Unable to acces UART\n");
     }
