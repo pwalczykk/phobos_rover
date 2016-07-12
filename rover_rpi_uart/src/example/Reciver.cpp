@@ -44,7 +44,7 @@ int main(int argc, char** argv){
             }
             else
             {
-                // rx_buffer[rx_length] = '\0';
+                rx_buffer[rx_length] = '\0';
                 printf("%i bytes read : %s\n", rx_length, rx_buffer);
             }
         }
