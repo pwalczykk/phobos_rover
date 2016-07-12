@@ -71,19 +71,26 @@ int main(){
     }
 
     // ----- RX Bytes -----
-    if(uart0_filestream != -1){
-        // Read up to 255 characters from port
-        unsigned char rx_buffer[256];
-        int rx_length = read(uart0_filestream, (void *)rx_buffer, 255);
-        if(rx_length < 0){
-            printf("UART RX error\n");
-        }else if(rx_length == 0){
-            printf("No data\n");
-        }else{
-            rx_buffer[rx_length] = '\0';
-            printf("%i bytes read: %s\n", rx_length, rx_buffer);
-        }
-    }
+    if (uart0_filestream != -1)
+	{
+		// Read up to 255 characters from the port if they are there
+		unsigned char rx_buffer[256];
+		int rx_length = read(uart0_filestream, (void*)rx_buffer, 255);		//Filestream, buffer to store in, number of bytes to read (max)
+		if (rx_length < 0)
+		{
+			//An error occured (will occur if there are no bytes)
+		}
+		else if (rx_length == 0)
+		{
+			//No data waiting
+		}
+		else
+		{
+			//Bytes received
+			rx_buffer[rx_length] = '\0';
+			printf("%i bytes read : %s\n", rx_length, rx_buffer);
+		}
+	}
 
     // ----- Closing the UART -----
     close(uart0_filestream);
