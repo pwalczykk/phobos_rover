@@ -79,6 +79,7 @@ int main(){
 		if (rx_length < 0)
 		{
 			//An error occured (will occur if there are no bytes)
+            printf("'UART RX error'\n");
 		}
 		else if (rx_length == 0)
 		{
