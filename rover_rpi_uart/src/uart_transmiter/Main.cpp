@@ -1,20 +1,11 @@
-#include "UART_Tx.hpp"
-
-#include <ros/ros.h>
+#include "ROS_UART_Tx.hpp"
 
 int main(int argc, char** argv){
 
     ros::init(argc, argv, "uart_transmiter");
     ros::NodeHandle nh;
 
-    UART_Tx uart_tx("/dev/ttyAMA0");
+    ROS_UART_Tx tx("/dev/ttyAMA0", "/rover/uart/tx", &nh);
 
-    ros::Rate loop_rate(1);
-
-    while(ros::ok()){
-        uart_tx.Transmit("Hello ");
-        uart_tx.Transmit("World ");
-        loop_rate.sleep();
-    }
-
+    ros::spin();
 }
