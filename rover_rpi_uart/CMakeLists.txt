@@ -14,3 +14,7 @@ catkin_package()
 add_executable(uart_transmiter
     src/uart_transmiter/Main.cpp)
 target_link_libraries(uart_transmiter ${catkin_LIBRARIES})
+
+add_executable(uart_reciver
+    src/uart_reciver/Main.cpp)
+target_link_libraries(uart_reciver ${catkin_LIBRARIES})
