@@ -83,6 +83,8 @@ int main(){
 		else if (rx_length == 0)
 		{
 			//No data waiting
+            printf("No data");
+
 		}
 		else
 		{
