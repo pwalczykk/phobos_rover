@@ -2,4 +2,4 @@
     <node name="ip_cam1" pkg="rover_vision" type="ip_camera_driver" args="https://admin:admin@192.168.1.111/tmpfs/auto.jpg /rover/ipcam1"/>
 
     <node name="web_video_server" pkg="web_video_server" type="web_video_server" output="screen" />
-<launch>
+</launch>
