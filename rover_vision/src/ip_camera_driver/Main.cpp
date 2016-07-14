@@ -6,7 +6,7 @@ int main(int argc, char** argv){
     std::string stream_addres = argv[argc-2];
     std::string publisher_topic = argv[argc-1];
 
-    ros::init(argc, argv, "ip_camera_driver");
+    ros::init(argc, argv, "aqqq");
     ros::NodeHandle nh;
     ros::Rate loop_rate(10);
 
