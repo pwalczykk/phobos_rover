@@ -18,10 +18,11 @@ public:
     }
 
     void Init(){
+        cap.open(stream_addres, cv::CAP_IMAGES);
         if(!cap.open(stream_addres)){
-          ROS_ERROR_STREAM("CAN'T OPEN CAMERA STREAM FROM ADDRES:");
-          ROS_ERROR_STREAM(stream_addres);
-          exit(-1);
+            ROS_ERROR_STREAM("CAN'T OPEN CAMERA STREAM FROM ADDRES:");
+            ROS_ERROR_STREAM(stream_addres);
+            exit(-1);
         }
     }
 

@@ -22,12 +22,16 @@ protected:
 
 public:
     ImagePublisher(std::string stream_addres, std::string publisher_topic) : CameraHandler(stream_addres){
+
         it = new image_transport::ImageTransport(nh);
         pub_img = it->advertise(publisher_topic, 1);
 
         header.seq = 0;
-        header.frame_id = "0";
+        header.frame_id = "ip";
+    }
 
+    void Init(){
+        CameraHandler::Init();
     }
 
     void PublishImage(){
@@ -37,7 +41,6 @@ public:
         CameraHandler::Capture();
 
         img = cv_bridge::CvImage(header, "bgr8", CameraHandler::frame).toImageMsg();
-
         pub_img.publish(img);
     }
 };
