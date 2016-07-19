@@ -14,7 +14,7 @@ int main(int argc, char** argv){
 
     ros::Rate loop_rate(20);
 
-    while(ros::ok){
+    while(ros::ok()){
         if(rx.ReadBuffer()){
             int wheels_left = rx.rx_buffer[0];
             int wheels_right = rx.rx_buffer[1];
@@ -30,4 +30,5 @@ int main(int argc, char** argv){
         }
         loop_rate.sleep();
     }
+    return 0;
 }

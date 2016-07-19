@@ -8,4 +8,6 @@ int main(int argc, char** argv){
     ROS_UART_Tx tx("/dev/ttyAMA0", "/rover/uart/tx", &nh);
 
     ros::spin();
+
+    return 0;
 }

@@ -9,8 +9,9 @@ int main(int argc, char** argv){
 
     ros::Rate loop_rate(100);
 
-    while(ros::ok){
+    while(ros::ok()){
         rx.CheckReciveBuffer();
         loop_rate.sleep();
     }
+    return 0;
 }

@@ -13,7 +13,7 @@ int main(int argc, char** argv){
 
     ros::Rate loop_rate(20);
 
-    while(ros::ok){
+    while(ros::ok()){
         ros::spinOnce();
         int32_t* word = (int32_t*)malloc(BUFF_SIZE * sizeof(int32_t));
         *(word+0) = pose_orient.msg.position.x;
