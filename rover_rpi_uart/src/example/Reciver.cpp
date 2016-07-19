@@ -40,7 +40,7 @@ int main(int argc, char** argv){
             }
             else if (rx_length == 0)
             {
-                // printf("No data\n");
+                printf("No data\n");
             }
             else
             {
