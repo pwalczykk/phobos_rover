@@ -2,17 +2,17 @@
 #define PubWheelsVel_HPP_
 
 #include <ros/ros.h>
-#include <rover_rpi_uart/DiffDrive.h>
+#include <rover_rpi_uart/WheelsVel2.h>
 
 class PubWheelsVel{
     ros::NodeHandle *nh;
     ros::Publisher pub;
 
-    rover_rpi_uart::DiffDrive msg;
+    rover_rpi_uart::WheelsVel2 msg;
 public:
     PubWheelsVel(std::string topic, ros::NodeHandle *nh){
         this->nh = nh;
-        this->pub = nh->advertise<rover_rpi_uart::DiffDrive>(topic, 100);
+        this->pub = nh->advertise<rover_rpi_uart::WheelsVel2>(topic, 100);
     }
     ~PubWheelsVel(){}
 
