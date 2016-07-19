@@ -17,15 +17,15 @@ int main(int argc, char** argv){
         printf("ERROR - Unable to acces UART\n");
     }
 
-    printf("filestream opened\n");
+    printf("filestream opened: %d\n", uart0_filestream);
 
     // UART settings
     struct termios options;
     tcgetattr(uart0_filestream, &options);
     options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
     options.c_iflag = IGNPAR;
-    options.c_iflag = 0;
-    options.c_iflag = 0;
+    options.c_oflag = 0;
+    options.c_lflag = 0;
     tcflush(uart0_filestream, TCIFLUSH);
     tcsetattr(uart0_filestream, TCSANOW, &options);
 
@@ -46,7 +46,7 @@ int main(int argc, char** argv){
             }
             else if (rx_length == 0)
             {
-                printf("No data\n");
+                //printf("No data\n");
             }
             else
             {
