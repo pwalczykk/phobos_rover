@@ -9,11 +9,15 @@
 
 int main(int argc, char** argv){
     // Open UART device
+    printf("filestream opening\n");
+
     int uart0_filestream = -1;
     uart0_filestream = open("/dev/ttyAMA0", O_RDONLY | O_NOCTTY);
     if(uart0_filestream == -1){
         printf("ERROR - Unable to acces UART\n");
     }
+
+    printf("filestream opened\n");
 
     // UART settings
     struct termios options;
@@ -27,6 +31,8 @@ int main(int argc, char** argv){
 
     // UART RX Buffer
     unsigned char rx_buffer[256];
+
+    printf("starting loop\n");
 
     // Reciving data
     while(1){
