@@ -34,8 +34,8 @@ public:
         tcgetattr(uart0_filestream, &options);
         options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
         options.c_iflag = IGNPAR;
-        options.c_iflag = 0;
-        options.c_iflag = 0;
+        options.c_oflag = 0;
+        options.c_lflag = 0;
         tcflush(uart0_filestream, TCIFLUSH);
         tcsetattr(uart0_filestream, TCSANOW, &options);
     }
