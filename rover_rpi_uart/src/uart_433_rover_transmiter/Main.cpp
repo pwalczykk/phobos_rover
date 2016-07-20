@@ -23,6 +23,7 @@ int main(int argc, char** argv){
         *(word+4) = pose_orient.msg.orientation.y;
         *(word+5) = pose_orient.msg.orientation.z;
         *(word+6) = pose_orient.msg.orientation.w;
+        *(word+7) = tx.ControlSum(word);
         tx.Transmit(word);
         loop_rate.sleep();
     }

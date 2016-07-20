@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BUFF_SIZE 8
+#define BUFF_SIZE 7+1   // 7 - data, 1 - control
 
 class UART_Rx{
 private:
@@ -50,11 +50,27 @@ public:
             return false;
         }
         else if(rx_length > 0){
-            rx_buffer[rx_length] = '\0';
             return true;
         }
         else{
             printf("UART RX ERROR!\n");
+            return false;
+        }
+    }
+
+
+    bool CheckControlSum(){
+        int32_t control_sum = 0;
+
+        // Control sum calculated as sum of all word elements
+        for(int i = 0; i < BUFF_SIZE-1; i++){
+            control_sum += rx_buffer[i];
+        }
+
+        if(control_sum == rx_buffer[7]){
+            return true;
+        }else{
+            printf("WRONG CONTROL SUM!!!");
             return false;
         }
     }

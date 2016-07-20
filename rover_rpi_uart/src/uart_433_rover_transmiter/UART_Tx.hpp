@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BUFF_SIZE 7
+#define BUFF_SIZE 7+1   // 7 - data, 1 - control
 
 class UART_Tx{
     int uart0_filestream;
@@ -56,6 +56,17 @@ public:
             }
         }
     }
+
+    int32_t ControlSum(int32_t* word){
+        int32_t control_sum = 0;
+
+        // Control sum calculated as sum of all word elements
+        for(int i = 0; i < BUFF_SIZE-1; i++){
+            control_sum += *(word + i);
+        }
+        return control_sum;
+    }
+
 };
 
 #endif

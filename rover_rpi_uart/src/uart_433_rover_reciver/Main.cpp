@@ -16,17 +16,19 @@ int main(int argc, char** argv){
 
     while(ros::ok()){
         if(rx.ReadBuffer()){
-            int wheels_left = rx.rx_buffer[0];
-            int wheels_right = rx.rx_buffer[1];
+            if(rx.CheckControlSum()){
+                int wheels_left = rx.rx_buffer[0];
+                int wheels_right = rx.rx_buffer[1];
 
-            int link_0  = rx.rx_buffer[2];
-            int link_1  = rx.rx_buffer[3];
-            int link_2  = rx.rx_buffer[4];
-            int link_3  = rx.rx_buffer[5];
-            int link_4  = rx.rx_buffer[6];
+                int link_0  = rx.rx_buffer[2];
+                int link_1  = rx.rx_buffer[3];
+                int link_2  = rx.rx_buffer[4];
+                int link_3  = rx.rx_buffer[5];
+                int link_4  = rx.rx_buffer[6];
 
-            wheels_vel.Publish(wheels_left, wheels_right);
-            arm_pose.Publish(link_0, link_1, link_2, link_3, link_4);
+                wheels_vel.Publish(wheels_left, wheels_right);
+                arm_pose.Publish(link_0, link_1, link_2, link_3, link_4);
+            }
         }
         loop_rate.sleep();
     }
