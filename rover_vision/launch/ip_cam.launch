@@ -6,7 +6,6 @@
     <!-- <node name="ip_cam4" pkg="rover_vision" type="ip_camera_driver" args="http://admin:admin@10.42.0.95/tmpfs/auto.jpg /rover/ip_cam4" output="screen"/> -->
 
     <node name="web_video_server" pkg="web_video_server" type="web_video_server" output="screen">
-    	<param name="server_threads" value="2"/>
-   	<param name="port" value="8080"/>
+ 
     </node>
 </launch>
