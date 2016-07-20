@@ -1,5 +1,6 @@
 #include "UART_Tx.hpp"
 #include "SubPoseOrient.hpp"
+#include <stdlib.h>
 
 
 int main(int argc, char** argv){
@@ -13,7 +14,7 @@ int main(int argc, char** argv){
 
     ros::Rate loop_rate(20);
 
-    int32_t* word = (int32_t*)malloc(BUFF_SIZE * sizeof(int32_t));
+    int32_t* word = (int32_t*) malloc(BUFF_SIZE * sizeof(int32_t));
 
     while(ros::ok()){
         ros::spinOnce();
@@ -29,6 +30,6 @@ int main(int argc, char** argv){
         loop_rate.sleep();
     }
 
-    free((void*)word);
+    // free(word);
     return 0;
 }
