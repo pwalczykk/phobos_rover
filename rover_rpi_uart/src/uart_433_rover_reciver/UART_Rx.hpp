@@ -45,7 +45,7 @@ public:
     }
 
     bool ReadBuffer(){
-        rx_length = read(uart0_filestream, (void*)rx_buffer, (BUFF_SIZE-1)*sizeof(int32_t));
+        rx_length = read(uart0_filestream, (void*)rx_buffer, (BUFF_SIZE)*sizeof(int32_t));
         if(rx_length == 0){
             return false;
         }
