@@ -16,7 +16,7 @@ class UART_Tx{
     int uart0_filestream;
     struct termios options;
 
-    int32_t* tx_buffer;
+    // int32_t* tx_buffer;
 public:
     UART_Tx(const char* device_addres){
         // Open UART device
@@ -36,21 +36,21 @@ public:
         tcsetattr(uart0_filestream, TCSANOW, &options);
 
         // Memory allocation for transmiting buffer
-        tx_buffer = (int32_t*)malloc(BUFF_SIZE * sizeof(int32_t));
+        // tx_buffer = (int32_t*)malloc(BUFF_SIZE * sizeof(int32_t));
     }
 
     ~UART_Tx(){
         close(uart0_filestream);
-        free(tx_buffer);
+        // free(tx_buffer);
     }
 
     void Transmit(int32_t* word){
         // Filling buffer
-        tx_buffer = word;
+        // tx_buffer = word;
 
         // Transmiting bytes
         if (uart0_filestream != -1){
-            int count = write(uart0_filestream, (const void*)tx_buffer, BUFF_SIZE * sizeof(int32_t));
+            int count = write(uart0_filestream, (const void*)word, BUFF_SIZE * sizeof(int32_t));
             if(count < 0){
                 printf("'UART TX error code: %d'\n", count);
             }
