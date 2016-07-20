@@ -41,7 +41,7 @@ public:
 
     ~UART_Tx(){
         close(uart0_filestream);
-        free(tx_buffer);
+        free((void*)tx_buffer);
     }
 
     void Transmit(int32_t* word){
