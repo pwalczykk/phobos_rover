@@ -1,0 +1,4 @@
+<launch>
+    <node name="uart_433_rover_reciver" pkg="rover_rpi_uart" type="uart_433_rover_reciver" output="screen"/>
+    <node name="uart_433_rover_transmiter" pkg="rover_rpi_uart" type="uart_433_rover_transmiter" output="screen"/>
+</launch>
