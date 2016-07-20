@@ -20,23 +20,23 @@ class UART_Tx{
 public:
     UART_Tx(const char* device_addres){
         // Open UART device
-        // uart0_filestream = -1;
-        // uart0_filestream = open(device_addres, O_WRONLY | O_NOCTTY | O_NDELAY);
-        // if(uart0_filestream == -1){
-        //     printf("ERROR - Unable to acces UART\n");
-        // }
-        //
-        // // UART device settings
-        // tcgetattr(uart0_filestream, &options);
-        // options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
-        // options.c_iflag = IGNPAR;
-        // options.c_oflag = 0;
-        // options.c_lflag = 0;
-        // tcflush(uart0_filestream, TCIFLUSH);
-        // tcsetattr(uart0_filestream, TCSANOW, &options);
+        uart0_filestream = -1;
+        uart0_filestream = open(device_addres, O_WRONLY | O_NOCTTY | O_NDELAY);
+        if(uart0_filestream == -1){
+            printf("ERROR - Unable to acces UART\n");
+        }
+
+        // UART device settings
+        tcgetattr(uart0_filestream, &options);
+        options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
+        options.c_iflag = IGNPAR;
+        options.c_oflag = 0;
+        options.c_lflag = 0;
+        tcflush(uart0_filestream, TCIFLUSH);
+        tcsetattr(uart0_filestream, TCSANOW, &options);
 
         // Memory allocation for transmiting buffer
-        // tx_buffer = (int32_t*)malloc(BUFF_SIZE * sizeof(int32_t));
+        tx_buffer = (int32_t*)malloc(BUFF_SIZE * sizeof(int32_t));
     }
 
     ~UART_Tx(){
