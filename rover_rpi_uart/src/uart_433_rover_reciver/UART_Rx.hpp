@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BUFF_SIZE 7+1   // 7 - data, 1 - control
+#define BUFF_SIZE 8   // 7 - data, 1 - control
 
 class UART_Rx{
 private:
@@ -46,11 +46,14 @@ public:
 
     bool ReadBuffer(){
         rx_length = read(uart0_filestream, (void*)rx_buffer, (BUFF_SIZE)*sizeof(int32_t));
+
         if(rx_length == 0){
             return false;
         }
         else if(rx_length > 0){
-            return true;
+	    printf("rx_length = %d\n", rx_length);
+            
+	    return true;
         }
         else{
             printf("UART RX ERROR!\n");
