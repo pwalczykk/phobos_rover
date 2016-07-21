@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BUFF_SIZE 7+1   // 7 - data, 1 - control
+#define BUFF_SIZE 8   // 7 - data, 1 - control
 
 class UART_Rx{
 private:

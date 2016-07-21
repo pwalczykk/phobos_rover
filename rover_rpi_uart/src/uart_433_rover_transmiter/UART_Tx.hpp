@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BUFF_SIZE 7+1   // 7 - data, 1 - control
+#define BUFF_SIZE 8   // 7 - data, 1 - control
 
 class UART_Tx{
     int uart0_filestream;
@@ -50,7 +50,7 @@ public:
 
         // Transmiting bytes
         if (uart0_filestream != -1){
-            int count = write(uart0_filestream, (const void*)word, BUFF_SIZE * sizeof(int32_t));
+            int count = write(uart0_filestream, (const void*)word, (BUFF_SIZE) * sizeof(int32_t));
             if(count < 0){
                 printf("'UART TX error code: %d'\n", count);
             }

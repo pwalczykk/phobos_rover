@@ -14,7 +14,7 @@ int main(int argc, char** argv){
 
     ros::Rate loop_rate(1);
 
-    int32_t* word = (int32_t*) malloc(BUFF_SIZE * sizeof(int32_t));
+    int32_t* word = (int32_t*) malloc((BUFF_SIZE) * sizeof(int32_t));
 
     while(ros::ok()){
         ros::spinOnce();
