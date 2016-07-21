@@ -43,6 +43,6 @@ int main(int argc, char** argv){
         ROS_INFO("TX: %d %d %d %d %d %d %d %d", *(word+0), *(word+1), *(word+2), *(word+3), *(word+4), *(word+5), *(word+6), *(word+7));
     }
 
-    // free(word);
+    free(word);
     return 0;
 }
