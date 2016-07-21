@@ -51,9 +51,7 @@ public:
             return false;
         }
         else if(rx_length > 0){
-	    printf("rx_length = %d\n", rx_length);
-            
-	    return true;
+	        return true;
         }
         else{
             printf("UART RX ERROR!\n");

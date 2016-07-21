@@ -12,7 +12,7 @@ int main(int argc, char** argv){
 
     SubPoseOrient pose_orient("/rover/pose", &nh);
 
-    ros::Rate loop_rate(1);
+    ros::Rate loop_rate(20);
 
     int32_t* word = (int32_t*) malloc((BUFF_SIZE) * sizeof(int32_t));
 
