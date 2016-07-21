@@ -46,11 +46,14 @@ public:
 
     bool ReadBuffer(){
         rx_length = read(uart0_filestream, (void*)rx_buffer, (BUFF_SIZE)*sizeof(int32_t));
+
         if(rx_length == 0){
             return false;
         }
         else if(rx_length > 0){
-            return true;
+	    printf("rx_length = %d\n", rx_length);
+            
+	    return true;
         }
         else{
             printf("UART RX ERROR!\n");
