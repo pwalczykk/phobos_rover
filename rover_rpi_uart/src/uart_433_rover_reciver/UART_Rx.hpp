@@ -70,7 +70,8 @@ public:
         if(control_sum == rx_buffer[7]){
             return true;
         }else{
-            printf("WRONG CONTROL SUM!!!");
+            printf("WRONG CONTROL SUM!!!\n");
+            printf("Calculated: %d    Recived: %d\n", control_sum, rx_buffer[7]);
             return false;
         }
     }
