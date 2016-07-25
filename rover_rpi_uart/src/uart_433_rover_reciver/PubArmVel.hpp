@@ -2,17 +2,17 @@
 #define PubArmVel_HPP_
 
 #include <ros/ros.h>
-#include <rover_rpi_uart/ArmPose5.h>
+#include <rover_rpi_uart/ArmVel5.h>
 
 class PubArmVel{
     ros::NodeHandle *nh;
     ros::Publisher pub;
 
-    rover_rpi_uart::ArmPose5 msg;
+    rover_rpi_uart::ArmVel5 msg;
 public:
     PubArmVel(std::string topic, ros::NodeHandle *nh){
         this->nh = nh;
-        this->pub = nh->advertise<rover_rpi_uart::ArmPose5>(topic, 100);
+        this->pub = nh->advertise<rover_rpi_uart::ArmVel5>(topic, 100);
     }
     ~PubArmVel(){}
 
