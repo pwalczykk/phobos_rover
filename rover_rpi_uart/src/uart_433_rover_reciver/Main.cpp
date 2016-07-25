@@ -1,6 +1,6 @@
 #include "UART_Rx.hpp"
 #include "PubWheelsVel.hpp"
-#include "PubArmPose.hpp"
+#include "PubArmVel.hpp"
 
 int main(int argc, char** argv){
 
@@ -10,7 +10,7 @@ int main(int argc, char** argv){
     UART_Rx rx("/dev/ttyAMA0");
 
     PubWheelsVel wheels_vel("/rover/control/wheels_vel", &nh);
-    PubArmPose arm_pose("/rover/control/arm_pose", &nh);
+    PubArmVel arm_vel("/rover/control/arm_vel", &nh);
 
     ros::Rate loop_rate(20);
 
@@ -27,7 +27,7 @@ int main(int argc, char** argv){
                 int link_4  = rx.rx_buffer[6];
 
                 wheels_vel.Publish(wheels_left, wheels_right);
-                arm_pose.Publish(link_0, link_1, link_2, link_3, link_4);
+                arm_vel.Publish(link_0, link_1, link_2, link_3, link_4);
             }
             ROS_INFO("RX: %d %d %d %d %d %d %d %d", *(rx.rx_buffer+0), *(rx.rx_buffer+1), *(rx.rx_buffer+2), *(rx.rx_buffer+3), *(rx.rx_buffer+4), *(rx.rx_buffer+5), *(rx.rx_buffer+6), *(rx.rx_buffer+7));
         }

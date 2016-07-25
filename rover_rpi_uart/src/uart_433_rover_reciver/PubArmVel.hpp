@@ -1,20 +1,20 @@
-#ifndef PubArmPose_HPP_
-#define PubArmPose_HPP_
+#ifndef PubArmVel_HPP_
+#define PubArmVel_HPP_
 
 #include <ros/ros.h>
 #include <rover_rpi_uart/ArmPose5.h>
 
-class PubArmPose{
+class PubArmVel{
     ros::NodeHandle *nh;
     ros::Publisher pub;
 
     rover_rpi_uart::ArmPose5 msg;
 public:
-    PubArmPose(std::string topic, ros::NodeHandle *nh){
+    PubArmVel(std::string topic, ros::NodeHandle *nh){
         this->nh = nh;
         this->pub = nh->advertise<rover_rpi_uart::ArmPose5>(topic, 100);
     }
-    ~PubArmPose(){}
+    ~PubArmVel(){}
 
     void Publish(int link0, int link1, int link2, int link3, int link4){
         this->msg.link0 = link0;

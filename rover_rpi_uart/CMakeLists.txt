@@ -13,7 +13,7 @@ include_directories(${catkin_INCLUDE_DIRS} ${roscpp_INCLUDE_DIRS})
 add_message_files(
     FILES
     WheelsVel2.msg
-    ArmPose5.msg
+    ArmVel5.msg
 )
 
 generate_messages(
