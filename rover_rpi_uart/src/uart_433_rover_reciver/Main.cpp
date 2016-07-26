@@ -12,7 +12,7 @@ int main(int argc, char** argv){
     PubWheelsVel wheels_vel("/rover/control/wheels_vel", &nh);
     PubArmVel arm_vel("/rover/control/arm_vel", &nh);
 
-    ros::Rate loop_rate(20);
+    ros::Rate loop_rate(10);
 
     while(ros::ok()){
         if(rx.ReadBuffer()){
