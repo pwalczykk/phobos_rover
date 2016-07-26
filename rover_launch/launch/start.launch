@@ -1,7 +1,7 @@
 <launch>
-    <include file="cameras_wifi.launch"/>
+    <!-- <include file="cameras_wifi.launch"/> -->
     <include file="radio433_uart.launch"/>
-    <include file="imu_i2c.launch"/>
+    <!-- <include file="imu_i2c.launch"/> -->
     <include file="motors_spi.launch"/>
-    <include file="localization.launch"/>
+    <!-- <include file="localization.launch"/> -->
 </launch>
