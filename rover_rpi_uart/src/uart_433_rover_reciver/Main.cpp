@@ -1,3 +1,4 @@
+#include <ros/ros.h>
 #include "UART_Rx.hpp"
 #include "PubWheelsVel.hpp"
 #include "PubArmVel.hpp"
@@ -6,6 +7,8 @@ int main(int argc, char** argv){
 
     ros::init(argc, argv, "uart_433_rover_reciver");
     ros::NodeHandle nh;
+
+    ROS_INFO("Reciver start");
 
     UART_Rx rx("/dev/ttyAMA0");
 
