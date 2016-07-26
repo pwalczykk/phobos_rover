@@ -1,4 +1,4 @@
 <launch>
-    <node name="motor_driver" pkg="spi_handler" type="motor_driver"/>
+    <node name="motor_driver" pkg="spi_handler" type="motor_control"/>
     <remap from="/motors" to="/rover/contorl/wheels_vel"/>
 </launch>
