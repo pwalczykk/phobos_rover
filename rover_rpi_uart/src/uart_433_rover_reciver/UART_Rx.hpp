@@ -25,7 +25,7 @@ public:
     UART_Rx(const char* device_addres){
         // Open UART device
         uart0_filestream = -1;
-        uart0_filestream = open(device_addres, O_RDONLY | O_NOCTTY);
+        uart0_filestream = open(device_addres, O_RDONLY | O_NOCTTY | O_NDELAY);
         if(uart0_filestream == -1){
             printf("ERROR - Unable to acces UART\n");
         }

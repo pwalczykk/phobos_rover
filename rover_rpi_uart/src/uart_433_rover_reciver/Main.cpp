@@ -33,6 +33,8 @@ int main(int argc, char** argv){
                 arm_vel.Publish(link_0, link_1, link_2, link_3, link_4);
             }
             ROS_INFO("RX: %d %d %d %d %d %d %d %d", *(rx.rx_buffer+0), *(rx.rx_buffer+1), *(rx.rx_buffer+2), *(rx.rx_buffer+3), *(rx.rx_buffer+4), *(rx.rx_buffer+5), *(rx.rx_buffer+6), *(rx.rx_buffer+7));
+        }else{
+            ROS_WARN("Cant read buffer");
         }
         loop_rate.sleep();
     }
