@@ -12,7 +12,9 @@ int main(int argc, char** argv){
     printf("filestream opening\n");
 
     int uart0_filestream = -1;
-    uart0_filestream = open("/dev/ttyAMA0", O_RDONLY | O_NOCTTY);
+    uart0_filestream = open("/dev/ttyACM0", O_RDONLY | O_NOCTTY);
+    //uart0_filestream = open("/dev/ttyACM0", O_RDONLY | O_NOCTTY | O_NDELAY);
+
     if(uart0_filestream == -1){
         printf("ERROR - Unable to acces UART\n");
     }
