@@ -27,6 +27,7 @@ public:
 
         // UART device settings
         tcgetattr(uart0_filestream, &options);
+        options.c_cc[VMIN] = 1;
         options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
         options.c_iflag = IGNPAR;
         options.c_oflag = 0;
