@@ -31,6 +31,8 @@ int main(int argc, char** argv){
 
                 wheels_vel.Publish(wheels_left, wheels_right);
                 arm_vel.Publish(link_0, link_1, link_2, link_3, link_4);
+            }else{
+                ROS_WARN("Wrong control sum");
             }
             ROS_INFO("RX: %d %d %d %d %d %d %d %d", *(rx.rx_buffer+0), *(rx.rx_buffer+1), *(rx.rx_buffer+2), *(rx.rx_buffer+3), *(rx.rx_buffer+4), *(rx.rx_buffer+5), *(rx.rx_buffer+6), *(rx.rx_buffer+7));
         }else{
