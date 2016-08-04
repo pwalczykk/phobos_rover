@@ -1,9 +1,13 @@
 #include <ros/ros.h>
 
+#include <phobos_shared/EncodersArm.h>
+#include <phobos_shared/EncodersWheels.h>
+#include <phobos_shared/EncodersRockerBogie.h>
+
 #include "../../../../../phobos_shared/src/phobos_shared/include/UART_Tx.hpp"
 
 #include "SubOdom.hpp"
-#include "SubJointsState.hpp"
+#include "SubEncoders.hpp"
 #include "SubError.hpp"
 
 int main(int argc, char** argv){
@@ -14,8 +18,11 @@ int main(int argc, char** argv){
     UART_Tx <FrameTelemetry>tx("/dev/ttyAMA0", TELEMETRY_DATA_NUM);
 
     SubOdom odom("/rover/localization/odom_ekf", &nh);
-    SubJointsState joints_state("/rover/encoders/joints_state", &nh);
     SubError error_control("/rover/security/error_code", &nh);
+
+    SubEncoders <phobos_shared::EncodersArm> arm_encoders ("/rover/encoders/arm", &nh);
+    SubEncoders <phobos_shared::EncodersWheels> wheels_encoders ("/rover/encoders/wheels", &nh);
+    SubEncoders <phobos_shared::EncodersRockerBogie> rocker_bogie_encoders ("/rover/encoders/rocker_bogie", &nh);
 
     ros::Rate loop_rate(10);
 
@@ -29,22 +36,24 @@ int main(int argc, char** argv){
         tx.WORD.orientation_z = odom.msg.orientation.z;
         tx.WORD.orientation_w = odom.msg.orientation.w;
 
-        tx.WORD.wheel_vel_fl = joints_state.msg.wheel_vel_fl;
-        tx.WORD.wheel_vel_fr = joints_state.msg.wheel_vel_fr;
-        tx.WORD.wheel_vel_ml = joints_state.msg.wheel_vel_ml;
-        tx.WORD.wheel_vel_mr = joints_state.msg.wheel_vel_mr;
-        tx.WORD.wheel_vel_bl = joints_state.msg.wheel_vel_bl;
-        tx.WORD.wheel_vel_br = joints_state.msg.wheel_vel_br;
-        tx.WORD.link_pose_0 = joints_state.msg.link_pose_0;
-        tx.WORD.link_pose_1 = joints_state.msg.link_pose_1;
-        tx.WORD.link_pose_2 = joints_state.msg.link_pose_2;
-        tx.WORD.link_pose_3 = joints_state.msg.link_pose_3;
-        tx.WORD.link_pose_4 = joints_state.msg.link_pose_4;
-        tx.WORD.grip_pose = joints_state.msg.grip_pose;
-        tx.WORD.rocker_pose_l = joints_state.msg.rocker_pose_l;
-        tx.WORD.rocker_pose_r = joints_state.msg.rocker_pose_r;
-        tx.WORD.bogie_pose_l = joints_state.msg.bogie_pose_l;
-        tx.WORD.bogie_pose_r = joints_state.msg.bogie_pose_r;
+        tx.WORD.wheel_vel_fl = wheels_encoders.msg.wheel_vel_fl;
+        tx.WORD.wheel_vel_fr = wheels_encoders.msg.wheel_vel_fr;
+        tx.WORD.wheel_vel_ml = wheels_encoders.msg.wheel_vel_ml;
+        tx.WORD.wheel_vel_mr = wheels_encoders.msg.wheel_vel_mr;
+        tx.WORD.wheel_vel_bl = wheels_encoders.msg.wheel_vel_bl;
+        tx.WORD.wheel_vel_br = wheels_encoders.msg.wheel_vel_br;
+
+        tx.WORD.link_pose_0 = arm_encoders.msg.link_pose_0;
+        tx.WORD.link_pose_1 = arm_encoders.msg.link_pose_1;
+        tx.WORD.link_pose_2 = arm_encoders.msg.link_pose_2;
+        tx.WORD.link_pose_3 = arm_encoders.msg.link_pose_3;
+        tx.WORD.link_pose_4 = arm_encoders.msg.link_pose_4;
+        tx.WORD.grip_pose = arm_encoders.msg.grip_pose;
+
+        tx.WORD.rocker_pose_l = rocker_bogie_encoders.msg.rocker_pose_l;
+        tx.WORD.rocker_pose_r = rocker_bogie_encoders.msg.rocker_pose_r;
+        tx.WORD.bogie_pose_l = rocker_bogie_encoders.msg.bogie_pose_l;
+        tx.WORD.bogie_pose_r = rocker_bogie_encoders.msg.bogie_pose_r;
 
         tx.WORD.error_code = error_control.msg.data;
         tx.WORD.control_sum = tx.ControlSum();
