@@ -10,17 +10,20 @@
 #include <stdlib.h>
 #include <string.h>
 
+template <typename FrameType>
 class UART_Rx{
 private:
     int uart0_filestream;
     struct termios options;
 protected:
     int rx_length;
+    int data_num;
 public:
-    FrameTeleoperation WORD;
+    FrameType WORD;
 
 public:
-    UART_Rx(const char* device_addres){
+    UART_Rx(const char* device_addres, const int data_num){
+        this->data_num = data_num;
         // Open UART device
         uart0_filestream = -1;
         uart0_filestream = open(device_addres, O_RDONLY | O_NOCTTY | O_NDELAY);
@@ -63,7 +66,7 @@ public:
         int32_t control_sum = 0;
 
         // Control sum calculated as sum of all WORD's data elements
-        for(int i = 0; i < TELEOPERATION_DATA_NUM; i++){
+        for(int i = 0; i < data_num; i++){
             control_sum += *(WORD.begin + i);
         }
 
