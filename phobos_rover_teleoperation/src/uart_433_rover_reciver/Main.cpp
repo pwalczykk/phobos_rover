@@ -1,8 +1,7 @@
 #include <ros/ros.h>
 
-#include "../../../../../phobos_shared/src/phobos_shared/include/uart_433.hpp"
+#include "../../../../../phobos_shared/src/phobos_shared/include/UART_Rx.hpp"
 
-#include "UART_Rx.hpp"
 #include "PubWheelsVel.hpp"
 #include "PubArmVel.hpp"
 
