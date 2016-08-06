@@ -2,13 +2,13 @@
 #define SUBODOM_HPP_
 
 #include <ros/ros.h>
-#include <geometry_msgs/Pose.h>
+#include <nav_msgs/Odometry.h>
 
 class SubOdom{
     ros::NodeHandle *nh;
     ros::Subscriber sub;
 public:
-    geometry_msgs::Pose msg;
+    nav_msgs::Odometry msg;
 public:
     SubOdom(std::string topic, ros::NodeHandle *nh){
         this->nh = nh;
@@ -16,7 +16,7 @@ public:
     }
     ~SubOdom(){}
 
-    void MsgInterrupt(const geometry_msgs::Pose msg){
+    void MsgInterrupt(const nav_msgs::Odometry msg){
         this->msg = msg;
     }
 };

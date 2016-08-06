@@ -12,3 +12,7 @@ catkin_package()
 add_executable(uart_433_rover_transmiter
     src/uart_433_rover_transmiter/Main.cpp)
 target_link_libraries(uart_433_rover_transmiter ${catkin_LIBRARIES})
+
+add_executable(wheels_odometry
+    src/wheels_odometry/Main.cpp)
+target_link_libraries(wheels_odometry ${catkin_LIBRARIES})

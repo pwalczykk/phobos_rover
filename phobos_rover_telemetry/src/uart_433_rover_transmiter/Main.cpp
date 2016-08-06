@@ -20,21 +20,21 @@ int main(int argc, char** argv){
     SubOdom odom("/rover/localization/odom_ekf", &nh);
     SubError error_control("/rover/security/error_code", &nh);
 
-    SubEncoders <phobos_shared::EncodersArm> arm_encoders ("/rover/encoders/arm", &nh);
-    SubEncoders <phobos_shared::EncodersWheels> wheels_encoders ("/rover/encoders/wheels", &nh);
-    SubEncoders <phobos_shared::EncodersRockerBogie> rocker_bogie_encoders ("/rover/encoders/rocker_bogie", &nh);
+    SubEncoders <phobos_shared::EncodersArm> arm_encoders ("/rover/encoders/arm_absolute", &nh);
+    SubEncoders <phobos_shared::EncodersWheels> wheels_encoders ("/rover/encoders/wheels_relative", &nh);
+    SubEncoders <phobos_shared::EncodersRockerBogie> rocker_bogie_encoders ("/rover/encoders/rocker_bogie_absolute", &nh);
 
     ros::Rate loop_rate(10);
 
     while(ros::ok()){
         ros::spinOnce();
-        tx.WORD.position_x = odom.msg.position.x;
-        tx.WORD.position_y = odom.msg.position.y;
-        tx.WORD.position_z = odom.msg.position.z;
-        tx.WORD.orientation_x = odom.msg.orientation.x;
-        tx.WORD.orientation_y = odom.msg.orientation.y;
-        tx.WORD.orientation_z = odom.msg.orientation.z;
-        tx.WORD.orientation_w = odom.msg.orientation.w;
+        tx.WORD.position_x = odom.msg.pose.pose.position.x;
+        tx.WORD.position_y = odom.msg.pose.pose.position.y;
+        tx.WORD.position_z = odom.msg.pose.pose.position.z;
+        tx.WORD.orientation_x = odom.msg.pose.pose.orientation.x;
+        tx.WORD.orientation_y = odom.msg.pose.pose.orientation.y;
+        tx.WORD.orientation_z = odom.msg.pose.pose.orientation.z;
+        tx.WORD.orientation_w = odom.msg.pose.pose.orientation.w;
 
         tx.WORD.wheel_vel_fl = wheels_encoders.msg.wheel_vel_fl;
         tx.WORD.wheel_vel_fr = wheels_encoders.msg.wheel_vel_fr;
