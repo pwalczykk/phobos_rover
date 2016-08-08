@@ -1,0 +1,5 @@
+<launch>
+    <node name="uart_433_rover_reciver" pkg="phobos_rover_teleoperation" type="uart_433_rover_reciver" output="screen"/>
+
+    <node name="uart_433_rover_transmiter" pkg="phobos_rover_telemetry" type="uart_433_rover_transmiter" output="screen"/>
+</launch>
