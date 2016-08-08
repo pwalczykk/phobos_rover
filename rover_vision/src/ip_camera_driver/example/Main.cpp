@@ -8,7 +8,8 @@ int main(int argc, char** argv){
     cv::VideoCapture cap;
     cv::Mat frame;
 
-    const std::string stream_adress ="http://admin:admin@10.42.0.95/tmpfs/auto.jpg";
+    // const std::string stream_adress ="http://admin:admin@10.42.0.95/tmpfs/auto.jpg";
+    const std::string stream_adress ="http://0.0.0.0:8080/stream?topic=/rover/camera1/image_raw";
     if(!argc == 2){
         exit(-1);
     }
