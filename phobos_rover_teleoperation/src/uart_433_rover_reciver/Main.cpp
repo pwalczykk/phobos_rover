@@ -20,7 +20,8 @@ int main(int argc, char** argv){
     ros::Rate loop_rate(10);
 
     while(ros::ok()){
-        if(rx.ReadBuffer()){
+        // if(rx.ReadBuffer()){
+        if(rx.ReadBufferAsString()){
             if(rx.CheckControlSum()){
                 int wheels_left = rx.WORD.wheels_left;
                 int wheels_right = rx.WORD.wheels_right;

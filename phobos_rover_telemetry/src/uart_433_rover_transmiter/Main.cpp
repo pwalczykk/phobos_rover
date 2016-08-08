@@ -58,7 +58,8 @@ int main(int argc, char** argv){
         tx.WORD.error_code = error_control.msg.data;
         tx.WORD.control_sum = tx.ControlSum();
 
-        tx.Transmit();
+        // tx.Transmit();
+        tx.TransmitAsString();
         loop_rate.sleep();
         // ROS_INFO("TX: %d %d %d %d %d %d %d %d", *(word+0), *(word+1), *(word+2), *(word+3), *(word+4), *(word+5), *(word+6), *(word+7));
     }
