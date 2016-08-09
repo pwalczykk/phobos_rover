@@ -24,7 +24,7 @@ int main(int argc, char** argv){
     SubEncoders <phobos_shared::EncodersWheels> wheels_encoders ("/rover/encoders/wheels_relative", &nh);
     SubEncoders <phobos_shared::EncodersRockerBogie> rocker_bogie_encoders ("/rover/encoders/rocker_bogie_absolute", &nh);
 
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(5);
 
     while(ros::ok()){
         ros::spinOnce();
