@@ -38,7 +38,7 @@ int main(int argc, char** argv){
             }else{
                 ROS_WARN("Wrong control sum");
             }
-            ROS_INFO("RX: %d %d %d %d %d %d %d %d %d", *(rx.WORD.begin+0), *(rx.WORD.begin+1), *(rx.WORD.begin+2), *(rx.WORD.begin+3), *(rx.WORD.begin+4), *(rx.WORD.begin+5), *(rx.WORD.begin+6), *(rx.WORD.begin+7), *(rx.WORD.begin+8));
+            // ROS_INFO("RX: %d %d %d %d %d %d %d %d %d", *(rx.WORD.begin+0), *(rx.WORD.begin+1), *(rx.WORD.begin+2), *(rx.WORD.begin+3), *(rx.WORD.begin+4), *(rx.WORD.begin+5), *(rx.WORD.begin+6), *(rx.WORD.begin+7), *(rx.WORD.begin+8));
         }else{
             ROS_WARN("Cant read buffer");
         }
