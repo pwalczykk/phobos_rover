@@ -12,7 +12,7 @@ int main(int argc, char** argv){
 
     ROS_INFO("Reciver start");
 
-    UART_Rx <FrameTeleoperation>rx("/dev/ttyAMA0", TELEOPERATION_DATA_NUM);
+    UART_Rx <FrameTeleoperation>rx("/dev/ttyAMA0", TELEOPERATION_DATA_NUM, TELEOPERATION_BUFFOR_SIZE);
 
     PubWheelsVel wheels_vel("/rover/control/wheels_vel", &nh);
     PubArmVel arm_vel("/rover/control/arm_vel", &nh);

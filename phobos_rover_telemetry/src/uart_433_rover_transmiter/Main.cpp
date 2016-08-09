@@ -15,7 +15,7 @@ int main(int argc, char** argv){
     ros::init(argc, argv, "uart_433_rover_transmiter");
     ros::NodeHandle nh;
 
-    UART_Tx <FrameTelemetry>tx("/dev/ttyAMA0", TELEMETRY_DATA_NUM);
+    UART_Tx <FrameTelemetry>tx("/dev/ttyAMA0", TELEMETRY_DATA_NUM, TELEMETRY_BUFFOR_SIZE);
 
     SubOdom odom("/rover/localization/odom_ekf", &nh);
     SubError error_control("/rover/security/error_code", &nh);
