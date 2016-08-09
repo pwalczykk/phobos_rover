@@ -21,7 +21,7 @@ int main(int argc, char** argv){
 
     while(ros::ok()){
         // if(rx.ReadBuffer()){
-        if(rx.ReadBufferAsString()){
+        if(rx.ReadBufferAsChar()){
             if(rx.CheckControlSum()){
                 int wheels_left = rx.WORD.wheels_left;
                 int wheels_right = rx.WORD.wheels_right;
