@@ -11,9 +11,12 @@
 #include "SubError.hpp"
 
 int main(int argc, char** argv){
-
+    int BASIC_RATE;
+    
     ros::init(argc, argv, "uart_433_rover_transmiter");
     ros::NodeHandle nh;
+
+    nh.param("basic_rate", BASIC_RATE, 5);
 
     UART_Tx <FrameTelemetry>tx("/dev/ttyAMA0", TELEMETRY_DATA_NUM, TELEMETRY_BUFFOR_SIZE);
 
@@ -24,7 +27,7 @@ int main(int argc, char** argv){
     SubEncoders <phobos_shared::EncodersWheels> wheels_encoders ("/rover/encoders/wheels_relative", &nh);
     SubEncoders <phobos_shared::EncodersRockerBogie> rocker_bogie_encoders ("/rover/encoders/rocker_bogie_absolute", &nh);
 
-    ros::Rate loop_rate(5);
+    ros::Rate loop_rate(BASIC_RATE);
 
     while(ros::ok()){
         ros::spinOnce();
