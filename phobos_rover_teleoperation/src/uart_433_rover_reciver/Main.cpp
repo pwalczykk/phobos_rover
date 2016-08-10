@@ -17,7 +17,10 @@ int main(int argc, char** argv){
     PubWheelsVel wheels_vel("/rover/control/wheels_vel", &nh);
     PubArmVel arm_vel("/rover/control/arm_vel", &nh);
 
+    int UART_SYNCHRO = 0;
+
     ros::Rate loop_rate(5);
+    ros::Rate synchro_rate(21);
 
     while(ros::ok()){
         // if(rx.ReadBuffer()){
@@ -35,6 +38,9 @@ int main(int argc, char** argv){
 
                 wheels_vel.Publish(wheels_left, wheels_right);
                 arm_vel.Publish(link_0, link_1, link_2, link_3, link_4, grip_force);
+
+                UART_SYNCHRO = 1;
+
             }else{
                 ROS_WARN("Wrong control sum");
             }
@@ -42,7 +48,11 @@ int main(int argc, char** argv){
         }else{
             ROS_WARN("Cant read buffer");
         }
-        loop_rate.sleep();
+        if(UART_SYNCHRO == 1){
+            loop_rate.sleep();
+        }else{
+            synchro_rate.sleep();
+        }
     }
     return 0;
 }
