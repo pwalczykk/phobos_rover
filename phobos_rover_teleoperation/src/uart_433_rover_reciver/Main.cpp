@@ -18,6 +18,9 @@ int main(int argc, char** argv){
     PubArmVel arm_vel("/rover/control/arm_vel", &nh);
 
     int UART_SYNCHRO = 0;
+    int ERROR_COUNTER = 0;
+    int MAX_ERROR_NUM = 21;
+
 
     ros::Rate loop_rate(5);
     ros::Rate synchro_rate(21);
@@ -40,14 +43,18 @@ int main(int argc, char** argv){
                 arm_vel.Publish(link_0, link_1, link_2, link_3, link_4, grip_force);
 
                 UART_SYNCHRO = 1;
-
+                ERROR_COUNTER = 0;
             }else{
-                ROS_WARN("Wrong control sum");
+                ERROR_COUNTER++;
             }
-            // ROS_INFO("RX: %d %d %d %d %d %d %d %d %d", *(rx.WORD.begin+0), *(rx.WORD.begin+1), *(rx.WORD.begin+2), *(rx.WORD.begin+3), *(rx.WORD.begin+4), *(rx.WORD.begin+5), *(rx.WORD.begin+6), *(rx.WORD.begin+7), *(rx.WORD.begin+8));
         }else{
-            ROS_WARN("Cant read buffer");
+            ERROR_COUNTER++;
         }
+
+        if(ERROR_COUNTER > MAX_ERROR_NUM){
+            exit(-1);
+        }
+
         if(UART_SYNCHRO == 1){
             loop_rate.sleep();
         }else{
