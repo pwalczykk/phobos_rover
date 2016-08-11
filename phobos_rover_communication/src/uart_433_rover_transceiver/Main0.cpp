@@ -13,7 +13,7 @@ int main(int argc, char** argv){
     ros::NodeHandle nh;
 
     nh.param("basic_rate", BASIC_RATE, 5);
-    nh.param("synchro_rate", SYNCHRO_RATE, 21);
+    nh.param("basic_rate", SYNCHRO_RATE, 21);
 
     ROS_INFO("Reciver start");
 
