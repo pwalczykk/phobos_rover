@@ -1,0 +1,3 @@
+<launch>
+    <node name="uart_433_rover_transceiver" pkg="phobos_rover_communication" type="uart_433_rover_transceiver" output="screen" respawn="true"/>
+</launch>
