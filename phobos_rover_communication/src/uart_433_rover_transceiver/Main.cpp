@@ -21,7 +21,7 @@ int main(int argc, char** argv){
     ros::NodeHandle nh;
 
     nh.param("basic_rate", BASIC_RATE, 5);
-    nh.param("synchro_rate", SYNCHRO_RATE, 21);
+    // nh.param("synchro_rate", SYNCHRO_RATE, 21);
 
     UART_Tx <FrameTelemetry>tx("/dev/ttyAMA0", TELEMETRY_DATA_NUM, TELEMETRY_BUFFOR_SIZE);
     UART_Rx <FrameTeleoperation>rx("/dev/ttyAMA0", TELEOPERATION_DATA_NUM, TELEOPERATION_BUFFOR_SIZE);
@@ -38,9 +38,11 @@ int main(int argc, char** argv){
     int UART_SYNCHRO = 0;
     int ERROR_COUNTER = 0;
     int MAX_ERROR_NUM = SYNCHRO_RATE;
+    int RECIVED_FIRST_DATA = 0;
+
 
     ros::Rate loop_rate(BASIC_RATE);
-    ros::Rate synchro_rate(SYNCHRO_RATE);
+    // ros::Rate synchro_rate(SYNCHRO_RATE);
 
     while(ros::ok()){
 
@@ -60,6 +62,7 @@ int main(int argc, char** argv){
                 wheels_vel.Publish(wheels_left, wheels_right);
                 arm_vel.Publish(link_0, link_1, link_2, link_3, link_4, grip_force);
 
+                RECIVED_FIRST_DATA = 1;
                 UART_SYNCHRO = 1;
                 ERROR_COUNTER = 0;
             }else{
@@ -71,6 +74,10 @@ int main(int argc, char** argv){
 
         if(ERROR_COUNTER > MAX_ERROR_NUM){
             // exit(-1);
+        }
+
+        if(RECIVED_FIRST_DATA == 0){
+            break;
         }
 
         // TRANSMITER
@@ -108,11 +115,11 @@ int main(int argc, char** argv){
         tx.TransmitAsChar64();
 
 
-        if(UART_SYNCHRO == 1){
+        // if(UART_SYNCHRO == 1){
             loop_rate.sleep();
-        }else{
-            synchro_rate.sleep();
-        }
+        // }else{
+        //     synchro_rate.sleep();
+        // }
 
     }
     return 0;
