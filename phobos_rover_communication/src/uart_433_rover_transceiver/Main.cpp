@@ -77,7 +77,7 @@ int main(int argc, char** argv){
         }
 
         if(RECIVED_FIRST_DATA == 0){
-            continue;
+            break;
         }
 
         // TRANSMITER
