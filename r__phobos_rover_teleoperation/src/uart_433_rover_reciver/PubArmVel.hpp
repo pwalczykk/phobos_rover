@@ -7,7 +7,7 @@
 class PubArmVel{
     ros::NodeHandle *nh;
     ros::Publisher pub;
-public:
+
     phobos_shared::ArmVel16 msg;
 public:
     PubArmVel(std::string topic, ros::NodeHandle *nh){
@@ -15,10 +15,6 @@ public:
         this->pub = nh->advertise<phobos_shared::ArmVel16>(topic, 100);
     }
     ~PubArmVel(){}
-
-    void Publish(){
-        this->pub.publish(msg);
-    }
 
     void Publish(int link_0, int link_1, int link_2, int link_3, int link_4, int grip_force){
         this->msg.link_0 = link_0;

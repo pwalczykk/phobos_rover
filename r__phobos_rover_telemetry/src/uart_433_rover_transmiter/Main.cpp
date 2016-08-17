@@ -5,81 +5,31 @@
 #include <phobos_shared/EncodersRockerBogie.h>
 
 #include "../../../../../phobos_shared/src/phobos_shared/include/UART_Tx.hpp"
-#include "../../../../../phobos_shared/src/phobos_shared/include/UART_Rx.hpp"
 
 #include "SubOdom.hpp"
 #include "SubEncoders.hpp"
 #include "SubError.hpp"
-#include "PubWheelsVel.hpp"
-#include "PubArmVel.hpp"
 
 int main(int argc, char** argv){
     int BASIC_RATE;
-    int SYNCHRO_RATE;
-
-    ros::init(argc, argv, "uart_433_rover_transceiver");
+    
+    ros::init(argc, argv, "uart_433_rover_transmiter");
     ros::NodeHandle nh;
 
     nh.param("basic_rate", BASIC_RATE, 5);
-    // nh.param("synchro_rate", SYNCHRO_RATE, 21);
 
     UART_Tx <FrameTelemetry>tx("/dev/ttyAMA0", TELEMETRY_DATA_NUM, TELEMETRY_BUFFOR_SIZE);
-    UART_Rx <FrameTeleoperation>rx("/dev/ttyAMA0", TELEOPERATION_DATA_NUM, TELEOPERATION_BUFFOR_SIZE);
 
     SubOdom odom("/rover/localization/odom_ekf", &nh);
     SubError error_control("/rover/security/error_code", &nh);
+
     SubEncoders <phobos_shared::EncodersArm> arm_encoders ("/rover/encoders/arm_absolute", &nh);
     SubEncoders <phobos_shared::EncodersWheels> wheels_encoders ("/rover/encoders/wheels_relative", &nh);
     SubEncoders <phobos_shared::EncodersRockerBogie> rocker_bogie_encoders ("/rover/encoders/rocker_bogie_absolute", &nh);
 
-    PubWheelsVel wheels_vel("/rover/control/wheels_vel", &nh);
-    PubArmVel arm_vel("/rover/control/arm_vel", &nh);
-
-    int UART_SYNCHRO = 0;
-    int ERROR_COUNTER = 0;
-    int MAX_ERROR_NUM = SYNCHRO_RATE;
-    int RECIVED_FIRST_DATA = 0;
-
-
     ros::Rate loop_rate(BASIC_RATE);
-    // ros::Rate synchro_rate(SYNCHRO_RATE);
 
     while(ros::ok()){
-
-        // RECIVER
-        if(rx.ReadBufferAsChar64()){
-            if(rx.CheckControlSum()){
-                wheels_vel.msg.wheels_left = rx.WORD.wheels_left;
-                wheels_vel.msg.wheels_right = rx.WORD.wheels_right;
-                wheels_vel.Publish();
-
-                arm_vel.msg.link_0  = rx.WORD.link_0;
-                arm_vel.msg.link_1  = rx.WORD.link_1;
-                arm_vel.msg.link_2  = rx.WORD.link_2;
-                arm_vel.msg.link_3  = rx.WORD.link_3;
-                arm_vel.msg.link_4  = rx.WORD.link_4;
-                arm_vel.msg.grip_force  = rx.WORD.grip_force;
-                arm_vel.Publish();
-
-                RECIVED_FIRST_DATA = 1;
-                UART_SYNCHRO = 1;
-                ERROR_COUNTER = 0;
-            }else{
-                ERROR_COUNTER++;
-            }
-        }else{
-            ERROR_COUNTER++;
-        }
-
-        if(ERROR_COUNTER > MAX_ERROR_NUM){
-            // exit(-1);
-        }
-
-        if(RECIVED_FIRST_DATA == 0){
-            break;
-        }
-
-        // TRANSMITER
         ros::spinOnce();
         tx.WORD.position_x = odom.msg.pose.pose.position.x;
         tx.WORD.position_y = odom.msg.pose.pose.position.y;
@@ -111,15 +61,10 @@ int main(int argc, char** argv){
         tx.WORD.error_code = error_control.msg.data;
         tx.WORD.control_sum = tx.ControlSum();
 
+        // tx.Transmit();
         tx.TransmitAsChar64();
-
-
-        // if(UART_SYNCHRO == 1){
-            loop_rate.sleep();
-        // }else{
-        //     synchro_rate.sleep();
-        // }
-
+        loop_rate.sleep();
+        // ROS_INFO("TX: %d %d %d %d %d %d %d %d", *(word+0), *(word+1), *(word+2), *(word+3), *(word+4), *(word+5), *(word+6), *(word+7));
     }
     return 0;
 }

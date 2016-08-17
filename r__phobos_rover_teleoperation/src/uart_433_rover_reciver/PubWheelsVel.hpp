@@ -7,7 +7,7 @@
 class PubWheelsVel{
     ros::NodeHandle *nh;
     ros::Publisher pub;
-public:
+
     phobos_shared::WheelsVel16 msg;
 public:
     PubWheelsVel(std::string topic, ros::NodeHandle *nh){
@@ -15,10 +15,6 @@ public:
         this->pub = nh->advertise<phobos_shared::WheelsVel16>(topic, 100);
     }
     ~PubWheelsVel(){}
-
-    void Publish(){
-        this->pub.publish(msg);
-    }
 
     void Publish(int wheels_left, int wheels_right){
         this->msg.wheels_left = wheels_left;
