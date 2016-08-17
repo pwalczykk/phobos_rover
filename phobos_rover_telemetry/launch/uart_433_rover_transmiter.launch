@@ -1,3 +1,0 @@
-<launch>
-    <node name="uart_433_rover_transmiter" pkg="phobos_rover_telemetry" type="uart_433_rover_transmiter" output="screen" respawn="true"/>
-</launch>
