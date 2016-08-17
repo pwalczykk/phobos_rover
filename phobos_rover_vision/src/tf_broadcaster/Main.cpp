@@ -22,13 +22,15 @@ int main(int argc, char** argv){
     tf::TransformBroadcaster br;
     tf::Transform transform;
 
-    ros::Rate loop_rate(1);
+    ros::Rate loop_rate(10);
 
     while(ros::ok()){
         transform.setOrigin(tf::Vector3(pose_x, pose_y, pose_z));
         transform.setRotation(tf::Quaternion(orient_x, orient_y, orient_z, orient_w));
 
         br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), parent_link, child_link));
+
+        loop_rate.sleep();
     }
 
     return 0;

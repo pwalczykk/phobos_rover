@@ -8,6 +8,8 @@
 #include "SubOdom.hpp"
 #include "PubOdom.hpp"
 
+DataOdometry odometry;
+DataEncoders encoders;
 
 int main(int argc, char** argv){
     ros::init(argc, argv, "wheels_odometry_3d");
@@ -18,9 +20,6 @@ int main(int argc, char** argv){
     nh.param("/wheel_circumference", wheel_circumference, (float)1.0);
     nh.param("/wheels_spacing", wheels_spacing, (float)1.0);
     nh.param("/impulses_per_rotation", impulses_per_rotation, 1000);
-
-    DataOdometry odometry;
-    DataEncoders encoders;
 
     SubOdom sub_odom("/rover/localization/odom_ekf",&odometry ,&nh);
     SubEncoders sub_encoders("/rover/encoders/wheels_relative",&encoders, &nh);
@@ -37,7 +36,7 @@ int main(int argc, char** argv){
     while(ros::ok()){
         ros::spinOnce();
 
-        if(sub_odom.new_msg && sub_encoders.new_msg){
+        if(sub_odom.new_msg || sub_encoders.new_msg){
             odometry_calculator.Update();
             pub_odom.Publish();
             sub_encoders.Reset();
