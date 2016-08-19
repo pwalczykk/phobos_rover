@@ -6,6 +6,8 @@
 
 #include "../../../../../phobos_shared/src/phobos_shared/include/UART_Tx.hpp"
 #include "../../../../../phobos_shared/src/phobos_shared/include/UART_Rx.hpp"
+#include "../../../../../phobos_shared/src/phobos_shared/include/Conversions.hpp"
+
 
 #include "SubOdom.hpp"
 #include "SubEncoders.hpp"
@@ -81,13 +83,13 @@ int main(int argc, char** argv){
 
         // TRANSMITER
         ros::spinOnce();
-        tx.WORD.position_x = odom.msg.pose.pose.position.x;
-        tx.WORD.position_y = odom.msg.pose.pose.position.y;
-        tx.WORD.position_z = odom.msg.pose.pose.position.z;
-        tx.WORD.orientation_x = odom.msg.pose.pose.orientation.x;
-        tx.WORD.orientation_y = odom.msg.pose.pose.orientation.y;
-        tx.WORD.orientation_z = odom.msg.pose.pose.orientation.z;
-        tx.WORD.orientation_w = odom.msg.pose.pose.orientation.w;
+        tx.WORD.position_x = Odom_Float2Int(odom.msg.pose.pose.position.x);
+        tx.WORD.position_y = Odom_Float2Int(odom.msg.pose.pose.position.y);
+        tx.WORD.position_z = Odom_Float2Int(odom.msg.pose.pose.position.z);
+        tx.WORD.orientation_x = Odom_Float2Int(odom.msg.pose.pose.orientation.x);
+        tx.WORD.orientation_y = Odom_Float2Int(odom.msg.pose.pose.orientation.y);
+        tx.WORD.orientation_z = Odom_Float2Int(odom.msg.pose.pose.orientation.z);
+        tx.WORD.orientation_w = Odom_Float2Int(odom.msg.pose.pose.orientation.w);
 
         tx.WORD.wheel_vel_fl = wheels_encoders.msg.wheel_vel_fl;
         tx.WORD.wheel_vel_fr = wheels_encoders.msg.wheel_vel_fr;

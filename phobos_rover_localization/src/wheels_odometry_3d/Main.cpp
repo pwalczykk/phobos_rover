@@ -17,8 +17,8 @@ int main(int argc, char** argv){
 
     float wheel_circumference, wheels_spacing;
     int impulses_per_rotation;
-    nh.param("/wheel_circumference", wheel_circumference, (float)1.0);
-    nh.param("/wheels_spacing", wheels_spacing, (float)1.0);
+    nh.param("/wheel_circumference", wheel_circumference, (float)0.6283);
+    nh.param("/wheels_spacing", wheels_spacing, (float)0.600);
     nh.param("/impulses_per_rotation", impulses_per_rotation, 1000);
 
     SubOdom sub_odom("/rover/localization/odom_ekf",&odometry ,&nh);
