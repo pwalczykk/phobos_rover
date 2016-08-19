@@ -83,13 +83,13 @@ int main(int argc, char** argv){
 
         // TRANSMITER
         ros::spinOnce();
-        tx.WORD.position_x = Odom_Float2Int(odom.msg.pose.pose.position.x);
-        tx.WORD.position_y = Odom_Float2Int(odom.msg.pose.pose.position.y);
-        tx.WORD.position_z = Odom_Float2Int(odom.msg.pose.pose.position.z);
-        tx.WORD.orientation_x = Odom_Float2Int(odom.msg.pose.pose.orientation.x);
-        tx.WORD.orientation_y = Odom_Float2Int(odom.msg.pose.pose.orientation.y);
-        tx.WORD.orientation_z = Odom_Float2Int(odom.msg.pose.pose.orientation.z);
-        tx.WORD.orientation_w = Odom_Float2Int(odom.msg.pose.pose.orientation.w);
+        tx.WORD.position_x = Pose_Float2Int(odom.msg.pose.pose.position.x);
+        tx.WORD.position_y = Pose_Float2Int(odom.msg.pose.pose.position.y);
+        tx.WORD.position_z = Pose_Float2Int(odom.msg.pose.pose.position.z);
+        tx.WORD.orientation_x = Orient_Float2Int(odom.msg.pose.pose.orientation.x);
+        tx.WORD.orientation_y = Orient_Float2Int(odom.msg.pose.pose.orientation.y);
+        tx.WORD.orientation_z = Orient_Float2Int(odom.msg.pose.pose.orientation.z);
+        tx.WORD.orientation_w = Orient_Float2Int(odom.msg.pose.pose.orientation.w);
 
         tx.WORD.wheel_vel_fl = wheels_encoders.msg.wheel_vel_fl;
         tx.WORD.wheel_vel_fr = wheels_encoders.msg.wheel_vel_fr;
