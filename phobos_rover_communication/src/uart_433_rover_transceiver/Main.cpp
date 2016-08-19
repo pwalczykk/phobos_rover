@@ -39,7 +39,7 @@ int main(int argc, char** argv){
 
     int UART_SYNCHRO = 0;
     int ERROR_COUNTER = 0;
-    int MAX_ERROR_NUM = SYNCHRO_RATE;
+    int MAX_ERROR_NUM = 5;
     int RECIVED_FIRST_DATA = 0;
 
 
