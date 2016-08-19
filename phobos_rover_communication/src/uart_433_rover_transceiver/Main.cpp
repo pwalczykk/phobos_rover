@@ -74,7 +74,7 @@ int main(int argc, char** argv){
         }
 
         if(ERROR_COUNTER > MAX_ERROR_NUM){
-            // exit(-1);
+            exit(-1);
         }
 
         if(RECIVED_FIRST_DATA == 0){
