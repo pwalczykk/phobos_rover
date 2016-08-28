@@ -1,13 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(spi_handler)
 
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS roscpp)
 
-## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+catkin_package()
+
+include_directories(${catkin_INCLUDE_DIRS})
 
 add_executable(motor_control src/motor_control.cpp src/SPI_Master.cpp)
 target_link_libraries(motor_control ${catkin_LIBRARIES} )
@@ -98,12 +96,6 @@ target_link_libraries(motor_control ${catkin_LIBRARIES} )
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES spi_handler
-#  CATKIN_DEPENDS other_catkin_pkg
-#  DEPENDS system_lib
-)
 
 ###########
 ## Build ##

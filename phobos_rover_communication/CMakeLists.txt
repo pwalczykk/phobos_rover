@@ -9,6 +9,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package()
 
+include_directories(${catkin_INCLUDE_DIRS})
+
 add_executable(uart_433_rover_transceiver
     src/uart_433_rover_transceiver/Main.cpp)
 target_link_libraries(uart_433_rover_transceiver ${catkin_LIBRARIES})

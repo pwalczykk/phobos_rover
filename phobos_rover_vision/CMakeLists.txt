@@ -7,6 +7,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package()
 
+include_directories(${catkin_INCLUDE_DIRS})
+
 add_executable(tf_broadcaster
     src/tf_broadcaster/Main.cpp)
 target_link_libraries(tf_broadcaster ${catkin_LIBRARIES})
