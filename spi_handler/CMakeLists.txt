@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(spi_handler)
 
-find_package(catkin REQUIRED COMPONENTS roscpp)
+find_package(catkin REQUIRED COMPONENTS
+    roscpp
+    phobos_shared
+)
 
 catkin_package()
 

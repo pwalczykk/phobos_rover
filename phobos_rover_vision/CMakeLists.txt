@@ -3,7 +3,9 @@ project(phobos_rover_vision)
 
 find_package(catkin REQUIRED COMPONENTS
     roscpp
-    tf)
+    tf
+    phobos_shared
+)
 
 catkin_package()
 
