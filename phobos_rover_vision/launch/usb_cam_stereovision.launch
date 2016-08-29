@@ -1,0 +1,17 @@
+<launch>
+    <node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" output="screen" ns="/usb">
+        <param name="~approximate_sync" value="True"/>
+
+        <remap from="/usb/left/image_raw" to="/usb/camera1/image" />
+        <remap from="/usb/left/camera_info" to="/usb/camera1/camera_info" />
+
+        <remap from="/usb/right/image_raw" to="/usb/camera2/image" />
+        <remap from="/usb/right/camera_info" to="/usb/camera2/camera_info"/>
+    </node>
+
+    <node name="disparity_image_view" pkg="image_view" type="disparity_view">
+        <remap from="/image" to="/rover/disparity"/>
+    </node>
+
+    <node name="usb_cam" pkg="phobos_rover_vision" type="titanum_camera_driver" args="1 2"/>
+</launch>

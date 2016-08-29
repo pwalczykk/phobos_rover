@@ -4,13 +4,25 @@ project(phobos_rover_vision)
 find_package(catkin REQUIRED COMPONENTS
     roscpp
     tf
+    cv_bridge
+    image_transport
     phobos_shared
 )
 
+find_package(OpenCV 3.0.0 REQUIRED)
+
 catkin_package()
 
-include_directories(${catkin_INCLUDE_DIRS})
+include_directories(SYSTEM ${OpenCV_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
 
 add_executable(tf_broadcaster
     src/tf_broadcaster/Main.cpp)
 target_link_libraries(tf_broadcaster ${catkin_LIBRARIES})
+
+add_executable(ip_camera_driver
+    src/ip_camera_driver/Main.cpp)
+target_link_libraries(ip_camera_driver ${Boost_LIBRARIES} ${OpenCV_LIBRARIES} ${catkin_LIBRARIES})
+
+add_executable(titanum_camera_driver
+    src/titanum_camera_driver/Main.cpp)
+target_link_libraries(titanum_camera_driver ${Boost_LIBRARIES} ${OpenCV_LIBRARIES} ${catkin_LIBRARIES})

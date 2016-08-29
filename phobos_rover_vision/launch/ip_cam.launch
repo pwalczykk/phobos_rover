@@ -1,0 +1,11 @@
+<launch>
+    <node name="ip_cam1" pkg="phobos_rover_vision" type="ip_camera_driver" args="http://admin:admin@192.168.1.111/tmpfs/auto.jpg /rover/ip_cam1" output="screen"/>
+    <node name="ip_cam2" pkg="phobos_rover_vision" type="ip_camera_driver" args="http://admin:admin@192.168.1.123/tmpfs/auto.jpg /rover/ip_cam2" output="screen"/>
+
+    <!-- <node name="ip_cam3" pkg="phobos_rover_vision" type="ip_camera_driver" args="http://admin:admin@10.42.0.46/tmpfs/auto.jpg /rover/ip_cam3" output="screen"/> -->
+    <!-- <node name="ip_cam4" pkg="phobos_rover_vision" type="ip_camera_driver" args="http://admin:admin@10.42.0.95/tmpfs/auto.jpg /rover/ip_cam4" output="screen"/> -->
+
+    <node name="web_video_server" pkg="web_video_server" type="web_video_server" output="screen">
+
+    </node>
+</launch>

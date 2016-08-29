@@ -1,0 +1,3 @@
+<launch>
+    <node name="ip_cam1" pkg="phobos_rover_vision" type="ip_camera_driver" args="http://192.168.2.55:8080/snapshot?topic=/rover/camera1/image_raw?type=.mjpg /rover/ip_cam1" output="screen"/>
+</launch>
