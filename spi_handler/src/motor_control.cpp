@@ -4,7 +4,7 @@
 #include "../include/SPI_Master.hpp"
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include <rover_rpi_uart/WheelsVel2.h>
+#include <phobos_shared/WheelsVel16.h>
 
 using namespace std;
 
@@ -19,7 +19,7 @@ string getEncoders() {
     return ss.str();
 }
 
-void setMotors(const rover_rpi_uart::WheelsVel2::ConstPtr& msg) {
+void setMotors(const phobos_shared::WheelsVel16::ConstPtr& msg) {
     ROS_INFO("I heard: [%d/%d]", msg->wheels_left, msg->wheels_right);
     uint16_t wleft = msg->wheels_left;
     uint16_t wright = msg->wheels_right;
@@ -55,4 +55,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
