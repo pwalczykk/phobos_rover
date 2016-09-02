@@ -26,3 +26,7 @@ target_link_libraries(ip_camera_driver ${Boost_LIBRARIES} ${OpenCV_LIBRARIES} ${
 add_executable(titanum_camera_driver
     src/titanum_camera_driver/Main.cpp)
 target_link_libraries(titanum_camera_driver ${Boost_LIBRARIES} ${OpenCV_LIBRARIES} ${catkin_LIBRARIES})
+
+add_executable(display_image
+    src/display_image/Main.cpp)
+target_link_libraries(display_image ${Boost_LIBRARIES} ${OpenCV_LIBRARIES} ${catkin_LIBRARIES})
