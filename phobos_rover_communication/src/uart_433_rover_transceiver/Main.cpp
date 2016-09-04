@@ -28,12 +28,12 @@ int main(int argc, char** argv){
     // UART_Tx <FrameTelemetry>tx("/dev/ttyAMA0", TELEMETRY_DATA_NUM, TELEMETRY_BUFFOR_SIZE);
     // UART_Rx <FrameTeleoperation>rx("/dev/ttyAMA0", TELEOPERATION_DATA_NUM, TELEOPERATION_BUFFOR_SIZE);
 
-    UART_Rx RX("/dev/ttyACM0");
+    UART_Rx RX("/dev/ttyAMA0");
     UART_Rx_Decoder <FrameTeleoperationCtrl>    rx_ctrl     (&RX, TO_CTRL_DATA_NUM,     TO_CTRL_DATA_SIZE,      TO_CTRL_BUFFOR_SIZE);
     UART_Rx_Decoder <FrameTeleoperationWheels>  rx_wheels   (&RX, TO_WHEELS_DATA_NUM,   TO_WHEELS_DATA_SIZE,    TO_WHEELS_BUFFOR_SIZE);
     UART_Rx_Decoder <FrameTeleoperationArm>     rx_arm      (&RX, TO_ARM_DATA_NUM,      TO_ARM_DATA_SIZE,       TO_ARM_BUFFOR_SIZE);
 
-    UART_Tx TX("/dev/ttyACM0");
+    UART_Tx TX("/dev/ttyAMA0");
     UART_Tx_Encoder <FrameTelemetryPose>    tx_pose    (&TX, TM_POSE_DATA_NUM,      TM_POSE_DATA_SIZE,      TM_POSE_BUFFOR_SIZE);
     UART_Tx_Encoder <FrameTelemetryOrient>  tx_orient  (&TX, TM_ORIENT_DATA_NUM,    TM_ORIENT_DATA_SIZE,    TM_ORIENT_BUFFOR_SIZE);
     UART_Tx_Encoder <FrameTelemetryWheels>  tx_wheels  (&TX, TM_WHEELS_DATA_NUM,    TM_WHEELS_DATA_SIZE,    TM_WHEELS_BUFFOR_SIZE);
