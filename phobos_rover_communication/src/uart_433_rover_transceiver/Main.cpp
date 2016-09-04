@@ -25,9 +25,6 @@ int main(int argc, char** argv){
     nh.param("basic_rate", BASIC_RATE, 5);
     nh.param("synchro_rate", SYNCHRO_RATE, 5);
 
-    // UART_Tx <FrameTelemetry>tx("/dev/ttyAMA0", TELEMETRY_DATA_NUM, TELEMETRY_BUFFOR_SIZE);
-    // UART_Rx <FrameTeleoperation>rx("/dev/ttyAMA0", TELEOPERATION_DATA_NUM, TELEOPERATION_BUFFOR_SIZE);
-
     UART_Rx RX("/dev/ttyAMA0");
     UART_Rx_Decoder <FrameTeleoperationCtrl>    rx_ctrl     (&RX, TO_CTRL_DATA_NUM,     TO_CTRL_DATA_SIZE,      TO_CTRL_BUFFOR_SIZE);
     UART_Rx_Decoder <FrameTeleoperationWheels>  rx_wheels   (&RX, TO_WHEELS_DATA_NUM,   TO_WHEELS_DATA_SIZE,    TO_WHEELS_BUFFOR_SIZE);
