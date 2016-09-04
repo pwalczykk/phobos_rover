@@ -30,3 +30,11 @@ target_link_libraries(titanum_camera_driver ${Boost_LIBRARIES} ${OpenCV_LIBRARIE
 add_executable(display_image
     src/display_image/Main.cpp)
 target_link_libraries(display_image ${Boost_LIBRARIES} ${OpenCV_LIBRARIES} ${catkin_LIBRARIES})
+
+add_executable(cameras_synchronizer
+    src/cameras_synchronizer/Main.cpp)
+target_link_libraries(cameras_synchronizer ${catkin_LIBRARIES})
+
+add_executable(cam_info_publisher
+    src/cam_info_publisher/Main.cpp)
+target_link_libraries(cam_info_publisher ${catkin_LIBRARIES})

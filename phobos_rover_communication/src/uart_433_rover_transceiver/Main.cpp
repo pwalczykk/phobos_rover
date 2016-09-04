@@ -37,7 +37,7 @@ int main(int argc, char** argv){
     UART_Tx_Encoder <FrameTelemetryArm>     tx_arm     (&TX, TM_ARM_DATA_NUM,       TM_ARM_DATA_SIZE,       TM_ARM_BUFFOR_SIZE);
     UART_Tx_Encoder <FrameTelemetrySusp>    tx_susp    (&TX, TM_SUSP_DATA_NUM,      TM_SUSP_DATA_SIZE,      TM_SUSP_BUFFOR_SIZE);
 
-    PubCtrl pub_ctrl("/rover/security/ctrl", &nh);
+    PubCtrl pub_ctrl("/rover/control/ctrl", &nh);
     PubWheelsVel pub_wheels("/rover/control/wheels_vel", &nh);
     PubArmVel pub_arm("/rover/control/arm_pose", &nh);
 
