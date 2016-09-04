@@ -209,7 +209,7 @@ int main(int argc, char** argv){
             break;
         }
 
-        if(tx_counter == 1){
+        if(tx_counter == 0){
             tx_counter = 0;
         }else{
             tx_counter++;
