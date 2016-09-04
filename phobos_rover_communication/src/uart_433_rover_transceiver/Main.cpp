@@ -144,6 +144,7 @@ int main(int argc, char** argv){
 
                 TX.Transmit(TM_POSE_BUFFOR_SIZE);
             }
+            break;
 
             case 1: {   // ORIENTATION
                 tx_orient.FRAME.header.type = FRAME_TM_ORIENT;
@@ -158,6 +159,7 @@ int main(int argc, char** argv){
 
                 TX.Transmit(TM_ORIENT_BUFFOR_SIZE);
             }
+            break;
 
             case 2: {   // WHEELS ENCODERS
 
@@ -175,6 +177,7 @@ int main(int argc, char** argv){
 
                 TX.Transmit(TM_WHEELS_BUFFOR_SIZE);
             }
+            break;
 
             case 3: {   // ARM ENCODERS
                 tx_arm.FRAME.header.type = FRAME_TM_ARM;
@@ -191,6 +194,7 @@ int main(int argc, char** argv){
 
                 TX.Transmit(TM_ARM_BUFFOR_SIZE);
             }
+            break;
 
             case 4: {   // SUSPENSION ENCODERS
                 tx_susp.FRAME.header.type = FRAME_TM_SUSP;
@@ -205,6 +209,7 @@ int main(int argc, char** argv){
 
                 TX.Transmit(TM_SUSP_BUFFOR_SIZE);
             }
+            break;
         }
 
         if(tx_counter == 4){
