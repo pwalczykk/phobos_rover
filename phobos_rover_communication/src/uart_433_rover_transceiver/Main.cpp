@@ -108,6 +108,7 @@ int main(int argc, char** argv){
                 }
                 default : {
                     ROS_WARN("RX frame not recognized! Type: %c (ASCII: %d)", RX.DecodeMessageType(), (int)RX.DecodeMessageType());
+                    ROS_WARN("Availablfe frames: %c %c %c", FRAME_TO_CTRL, FRAME_TO_WHEELS, FRAME_TO_ARM);
                     ERROR_COUNTER++;
                 }
             }
