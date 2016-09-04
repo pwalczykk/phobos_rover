@@ -73,6 +73,7 @@ int main(int argc, char** argv){
 
                         RECIVED_FIRST_DATA = 1; UART_SYNCHRO = 1; ERROR_COUNTER = 0;
                     }
+                    break;
                 }
                 case FRAME_TO_WHEELS: {
                     if(rx_wheels.CheckControlSum()){
@@ -87,6 +88,7 @@ int main(int argc, char** argv){
 
                         RECIVED_FIRST_DATA = 1; UART_SYNCHRO = 1; ERROR_COUNTER = 0;
                     }
+                    break;
                 }
                 case FRAME_TO_ARM: {
                     if(rx_arm.CheckControlSum()){
@@ -105,6 +107,7 @@ int main(int argc, char** argv){
 
                         RECIVED_FIRST_DATA = 1; UART_SYNCHRO = 1; ERROR_COUNTER = 0;
                     }
+                    break;
                 }
                 default : {
                     ROS_WARN("RX frame not recognized! Type: %c (ASCII: %d)", RX.DecodeMessageType(), (int)RX.DecodeMessageType());
