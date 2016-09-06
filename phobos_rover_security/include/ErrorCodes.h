@@ -1,0 +1,7 @@
+#ifndef PHOBOS_ERROR_CODES_
+#define PHOBOS_ERROR_CODES_
+
+#define ABOUT_TO_FALL_OVER 1
+#define COLLISION_DETECTED 2
+
+#endif
