@@ -79,8 +79,8 @@ int main(int argc, char** argv){
                         pub_ctrl.msg.data = rx_wheels.FRAME.header.ctrl;
                         pub_ctrl.Publish();
 
-                        pub_wheels.msg.wheels_left = rx_wheels.FRAME.wheels_left;
-                        pub_wheels.msg.wheels_right = rx_wheels.FRAME.wheels_right;
+                        pub_wheels.msg.wheels_left = conv::wheel_sig.FromRx(rx_wheels.FRAME.wheels_left);
+                        pub_wheels.msg.wheels_right = conv::wheel_sig.FromRx(rx_wheels.FRAME.wheels_right);
                         pub_wheels.Publish();
 
                         RECIVED_FIRST_DATA = 1; UART_SYNCHRO = 1; ERROR_COUNTER = 0;
@@ -94,12 +94,12 @@ int main(int argc, char** argv){
                         pub_ctrl.msg.data = rx_arm.FRAME.header.ctrl;
                         pub_ctrl.Publish();
 
-                        pub_arm.msg.link_0 = rx_arm.FRAME.link_0;
-                        pub_arm.msg.link_1 = rx_arm.FRAME.link_1;
-                        pub_arm.msg.link_2 = rx_arm.FRAME.link_2;
-                        pub_arm.msg.link_3 = rx_arm.FRAME.link_3;
-                        pub_arm.msg.link_4 = rx_arm.FRAME.link_4;
-                        pub_arm.msg.gripper = rx_arm.FRAME.grip;
+                        pub_arm.msg.link_0 = conv::link0_sig.FromRx(rx_arm.FRAME.link_0);
+                        pub_arm.msg.link_1 = conv::link1_sig.FromRx(rx_arm.FRAME.link_1);
+                        pub_arm.msg.link_2 = conv::link2_sig.FromRx(rx_arm.FRAME.link_2);
+                        pub_arm.msg.link_3 = conv::link3_sig.FromRx(rx_arm.FRAME.link_3);
+                        pub_arm.msg.link_4 = conv::link4_sig.FromRx(rx_arm.FRAME.link_4);
+                        pub_arm.msg.gripper = conv::grip_sig.FromRx(rx_arm.FRAME.grip);
                         pub_arm.Publish();
 
                         RECIVED_FIRST_DATA = 1; UART_SYNCHRO = 1; ERROR_COUNTER = 0;
@@ -133,9 +133,9 @@ int main(int argc, char** argv){
                 tx_pose.FRAME.header.type = FRAME_TM_POSE;
                 tx_pose.FRAME.header.ctrl = sub_error.msg.data;
 
-                tx_pose.FRAME.position_x = Pose_Float2Int(sub_odom.msg.pose.pose.position.x);
-                tx_pose.FRAME.position_y = Pose_Float2Int(sub_odom.msg.pose.pose.position.y);
-                tx_pose.FRAME.position_z = Pose_Float2Int(sub_odom.msg.pose.pose.position.z);
+                tx_pose.FRAME.position_x = conv::Pose_Float2Int(sub_odom.msg.pose.pose.position.x);
+                tx_pose.FRAME.position_y = conv::Pose_Float2Int(sub_odom.msg.pose.pose.position.y);
+                tx_pose.FRAME.position_z = conv::Pose_Float2Int(sub_odom.msg.pose.pose.position.z);
 
                 tx_pose.EncodeBuffor();
 
@@ -147,10 +147,10 @@ int main(int argc, char** argv){
                 tx_orient.FRAME.header.type = FRAME_TM_ORIENT;
                 tx_orient.FRAME.header.ctrl = sub_error.msg.data;
 
-                tx_orient.FRAME.orientation_x = Orient_Float2Int(sub_odom.msg.pose.pose.orientation.x);
-                tx_orient.FRAME.orientation_y = Orient_Float2Int(sub_odom.msg.pose.pose.orientation.y);
-                tx_orient.FRAME.orientation_z = Orient_Float2Int(sub_odom.msg.pose.pose.orientation.z);
-                tx_orient.FRAME.orientation_w = Orient_Float2Int(sub_odom.msg.pose.pose.orientation.w);
+                tx_orient.FRAME.orientation_x = conv::Orient_Float2Int(sub_odom.msg.pose.pose.orientation.x);
+                tx_orient.FRAME.orientation_y = conv::Orient_Float2Int(sub_odom.msg.pose.pose.orientation.y);
+                tx_orient.FRAME.orientation_z = conv::Orient_Float2Int(sub_odom.msg.pose.pose.orientation.z);
+                tx_orient.FRAME.orientation_w = conv::Orient_Float2Int(sub_odom.msg.pose.pose.orientation.w);
 
                 tx_orient.EncodeBuffor();
 
@@ -158,17 +158,17 @@ int main(int argc, char** argv){
             }
             break;
 
-            case 2: {   // WHEELS ENCODERS
+            case 2: {   // WHEELS ENCODERS - no need for conversion
 
                 tx_wheels.FRAME.header.type = FRAME_TM_WHEELS;
                 tx_wheels.FRAME.header.ctrl = sub_error.msg.data;
 
-                tx_wheels.FRAME.wheel_vel_fl = sub_wheels_encoders.msg.wheel_vel_fl;
-                tx_wheels.FRAME.wheel_vel_fr = sub_wheels_encoders.msg.wheel_vel_fr;
-                tx_wheels.FRAME.wheel_vel_ml = sub_wheels_encoders.msg.wheel_vel_ml;
-                tx_wheels.FRAME.wheel_vel_mr = sub_wheels_encoders.msg.wheel_vel_mr;
-                tx_wheels.FRAME.wheel_vel_bl = sub_wheels_encoders.msg.wheel_vel_bl;
-                tx_wheels.FRAME.wheel_vel_br = sub_wheels_encoders.msg.wheel_vel_br;
+                tx_wheels.FRAME.wheel_vel_fl = conv::wheel_enc.ToTx(sub_wheels_encoders.msg.wheel_vel_fl);
+                tx_wheels.FRAME.wheel_vel_fr = conv::wheel_enc.ToTx(sub_wheels_encoders.msg.wheel_vel_fr);
+                tx_wheels.FRAME.wheel_vel_ml = conv::wheel_enc.ToTx(sub_wheels_encoders.msg.wheel_vel_ml);
+                tx_wheels.FRAME.wheel_vel_mr = conv::wheel_enc.ToTx(sub_wheels_encoders.msg.wheel_vel_mr);
+                tx_wheels.FRAME.wheel_vel_bl = conv::wheel_enc.ToTx(sub_wheels_encoders.msg.wheel_vel_bl);
+                tx_wheels.FRAME.wheel_vel_br = conv::wheel_enc.ToTx(sub_wheels_encoders.msg.wheel_vel_br);
 
                 tx_wheels.EncodeBuffor();
 
@@ -180,12 +180,12 @@ int main(int argc, char** argv){
                 tx_arm.FRAME.header.type = FRAME_TM_ARM;
                 tx_arm.FRAME.header.ctrl = sub_error.msg.data;
 
-                tx_arm.FRAME.link_pose_0 = sub_arm_encoders.msg.link_pose_0;
-                tx_arm.FRAME.link_pose_1 = sub_arm_encoders.msg.link_pose_1;
-                tx_arm.FRAME.link_pose_2 = sub_arm_encoders.msg.link_pose_2;
-                tx_arm.FRAME.link_pose_3 = sub_arm_encoders.msg.link_pose_3;
-                tx_arm.FRAME.link_pose_4 = sub_arm_encoders.msg.link_pose_4;
-                tx_arm.FRAME.grip_pose = sub_arm_encoders.msg.grip_pose;
+                tx_arm.FRAME.link_pose_0 = conv::link0_enc.ToTx(sub_arm_encoders.msg.link_pose_0);
+                tx_arm.FRAME.link_pose_1 = conv::link1_enc.ToTx(sub_arm_encoders.msg.link_pose_1);
+                tx_arm.FRAME.link_pose_2 = conv::link2_enc.ToTx(sub_arm_encoders.msg.link_pose_2);
+                tx_arm.FRAME.link_pose_3 = conv::link3_enc.ToTx(sub_arm_encoders.msg.link_pose_3);
+                tx_arm.FRAME.link_pose_4 = conv::link4_enc.ToTx(sub_arm_encoders.msg.link_pose_4);
+                tx_arm.FRAME.grip_pose = conv::grip_enc.ToTx(sub_arm_encoders.msg.grip_pose);
 
                 tx_arm.EncodeBuffor();
 
@@ -197,10 +197,10 @@ int main(int argc, char** argv){
                 tx_susp.FRAME.header.type = FRAME_TM_SUSP;
                 tx_susp.FRAME.header.ctrl = sub_error.msg.data;
 
-                tx_susp.FRAME.rocker_pose_l = sub_rocker_bogie_encoders.msg.rocker_pose_l;
-                tx_susp.FRAME.rocker_pose_r = sub_rocker_bogie_encoders.msg.rocker_pose_r;
-                tx_susp.FRAME.bogie_pose_l = sub_rocker_bogie_encoders.msg.bogie_pose_l;
-                tx_susp.FRAME.bogie_pose_r = sub_rocker_bogie_encoders.msg.bogie_pose_r;
+                tx_susp.FRAME.rocker_pose_l = conv::rocker_enc.ToTx(sub_rocker_bogie_encoders.msg.rocker_pose_l);
+                tx_susp.FRAME.rocker_pose_r = conv::rocker_enc.ToTx(sub_rocker_bogie_encoders.msg.rocker_pose_r);
+                tx_susp.FRAME.bogie_pose_l = conv::bogie_enc.ToTx(sub_rocker_bogie_encoders.msg.bogie_pose_l);
+                tx_susp.FRAME.bogie_pose_r = conv::bogie_enc.ToTx(sub_rocker_bogie_encoders.msg.bogie_pose_r);
 
                 tx_susp.EncodeBuffor();
 
@@ -209,7 +209,7 @@ int main(int argc, char** argv){
             break;
         }
 
-        if(tx_counter == 4){
+        if(tx_counter == 3){
             tx_counter = 0;
         }else{
             tx_counter++;
