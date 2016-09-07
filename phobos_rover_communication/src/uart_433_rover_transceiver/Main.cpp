@@ -130,6 +130,7 @@ int main(int argc, char** argv){
         ros::spinOnce();
         switch (tx_counter){
             case 0: {   // POSITION
+                ROS_ERROR("Transmitting POSE");
                 tx_pose.FRAME.header.type = FRAME_TM_POSE;
                 tx_pose.FRAME.header.ctrl = sub_error.msg.data;
 
@@ -144,6 +145,7 @@ int main(int argc, char** argv){
             break;
 
             case 1: {   // ORIENTATION
+                ROS_ERROR("Transmitting ODOM");
                 tx_orient.FRAME.header.type = FRAME_TM_ORIENT;
                 tx_orient.FRAME.header.ctrl = sub_error.msg.data;
 
@@ -159,7 +161,7 @@ int main(int argc, char** argv){
             break;
 
             case 2: {   // WHEELS ENCODERS - no need for conversion
-
+                ROS_ERROR("Transmitting WHEELS ENCODERS");
                 tx_wheels.FRAME.header.type = FRAME_TM_WHEELS;
                 tx_wheels.FRAME.header.ctrl = sub_error.msg.data;
 
@@ -177,6 +179,7 @@ int main(int argc, char** argv){
             break;
 
             case 3: {   // ARM ENCODERS
+                ROS_ERROR("Transmitting ARM ENCODERS");
                 tx_arm.FRAME.header.type = FRAME_TM_ARM;
                 tx_arm.FRAME.header.ctrl = sub_error.msg.data;
 
@@ -194,6 +197,7 @@ int main(int argc, char** argv){
             break;
 
             case 4: {   // SUSPENSION ENCODERS
+                ROS_ERROR("Transmitting SUSP ENCODERS");
                 tx_susp.FRAME.header.type = FRAME_TM_SUSP;
                 tx_susp.FRAME.header.ctrl = sub_error.msg.data;
 
