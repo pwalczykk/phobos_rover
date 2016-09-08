@@ -1,0 +1,82 @@
+<launch>
+    <node name="web_video_server"       pkg="web_video_server"      type="web_video_server" ns="/rover" output="screen"/>
+
+    <node name="camera1_tf_broadcaster" pkg="phobos_rover_vision" type="tf_broadcaster" ns="/rover">
+        <param name="parent_link" value="base_link"/>
+        <param name="child_link" value="camera1_lens"/>
+        <param name="pose_x" value =" 0.265"/>
+        <param name="pose_y" value =" 0.035"/>
+        <param name="pose_z" value ="-0.070"/>
+        <param name="orient_x" value ="-0.5"/>
+        <param name="orient_y" value =" 0.5"/>
+        <param name="orient_z" value ="-0.5"/>
+        <param name="orient_w" value =" 0.5"/>
+    </node>
+
+    <!-- <node name="camera_info_publisher_1" pkg="phobos_rover_vision" type="camera_info_publisher"/>
+    <node name="camera_info_publisher_2" pkg="phobos_rover_vision" type="camera_info_publisher"/> -->
+
+    <node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" output="screen" ns="/rover">
+        <param name="~approximate_sync" value="True"/>
+        <param name="~queue_size" value="10"/>
+
+        <remap from="/rover/left/image_raw"     to="/rover/camera1/image_raw" />
+        <remap from="/rover/left/camera_info"   to="/rover/camera1/camera_info" />
+
+        <remap from="/rover/right/image_raw"    to="/rover/camera2/image_raw" />
+        <remap from="/rover/right/camera_info"  to="/rover/camera2/camera_info"/>
+    </node>
+
+
+    <node name="visual_odometry" pkg="viso2_ros" type="stereo_odometer" output="screen" ns="/rover">
+        <remap from="/rover/stereo/left/rover/image"        to="/rover/camera1/image_raw" />
+        <remap from="/rover/stereo/left/camera_info"        to="/rover/camera1/camera_info" />
+
+        <remap from="/rover/stereo/right/rover/image"       to="/rover/camera2/image_raw" />
+        <remap from="/rover/stereo/right/camera_info"       to="/rover/camera2/camera_info"/>
+
+        <remap from="/rover/visual_odometry/odometry"       to="/rover/localization/vo"/>
+        <remap from="/rover/visual_odometry/pose"           to="/rover/localization/vo/pose"/>
+        <remap from="/rover/visual_odometry/point_cloud"    to="/rover/localization/vo/point_cloud"/>
+        <remap from="/rover/visual_odometry/info"           to="/rover/localization/vo/info"/>
+
+        <param name="base_link_frame_id" value="base_link"/>
+        <!-- <param name="sensor_frame_id" value="camera1_lens"/> -->
+        <param name="odom_frame_id" value="odom"/>
+
+        <param name="publish_tf" value="false"/>
+    </node>
+
+    <node name="display_image_1" pkg="phobos_rover_vision" type="display_image" ns="rover">
+        <param name="camera_name" value="camera1"/>
+        <param name="width" value="320"/>
+        <param name="height" value="240"/>
+        <param name="x" value="320"/>
+        <param name="y" value="0"/>
+    </node>
+
+    <node name="display_image_2" pkg="phobos_rover_vision" type="display_image" ns="rover">
+        <param name="camera_name" value="camera2"/>
+        <param name="width" value="320"/>
+        <param name="height" value="240"/>
+        <param name="x" value="320"/>
+        <param name="y" value="240"/>
+    </node>
+
+    <node name="display_image_3" pkg="phobos_rover_vision" type="display_image" ns="rover">
+        <param name="camera_name" value="camera3"/>
+        <param name="width" value="320"/>
+        <param name="height" value="240"/>
+        <param name="x" value="0"/>
+        <param name="y" value="0"/>
+    </node>
+
+    <node name="display_image_4" pkg="phobos_rover_vision" type="display_image" ns="rover">
+        <param name="camera_name" value="camera4"/>
+        <param name="width" value="320"/>
+        <param name="height" value="240"/>
+        <param name="x" value="0"/>
+        <param name="y" value="240"/>
+    </node>
+
+</launch>

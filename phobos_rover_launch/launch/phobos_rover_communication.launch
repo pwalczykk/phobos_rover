@@ -1,0 +1,12 @@
+<launch>
+
+<!-- COMMUNICATION -->
+    <node name="uart_433_rover_transceiver" pkg="phobos_rover_communication" type="uart_433_rover_transceiver" output="screen" respawn="true"/>
+
+<!-- TODO: SPI od Michała -->
+<!-- MOTOR CONTROL -->
+    <!-- <node name="spi_motor_transceiver" pkg="phobos_rover_communication" type="spi_motor_transceiver" output="screen" respawn="true"/> -->
+
+<!-- TODO: IMU od Wiktora -->
+
+</launch>

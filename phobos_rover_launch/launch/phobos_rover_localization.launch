@@ -1,0 +1,52 @@
+<launch>
+    <node name="wheels_odometry_3d"         pkg="phobos_rover_localization" type="wheels_odometry_3d"           ns="/rover">
+        <param name="/wheel_circumference"  value="0.6283"/>
+        <param name="/wheels_spacing"       value="0.600"/>
+        <param name="/impulses_per_rotation" value="10000"/>
+    </node>
+
+    <node name="ekf_localization_node"      pkg="robot_localization"        type="ekf_localization_node"       ns="/rover"  clear_params="true"     output="screen">
+        <remap from="/rover/odometry/filtered" to="/rover/localization/odom_ekf"/>
+
+        <param name="frequency" value="10"/>
+        <param name="sensor_timeout" value="0.3"/>
+        <param name="two_d_mode" value="false"/>
+
+        <param name="odom_frame" value="odom"/>
+        <param name="base_link_frame" value="base_link"/>
+        <param name="world_frame" value="odom"/>
+
+        <param name="transform_time_offset" value="0.0"/>
+
+        <param name="odom0" value="/rover/localization/vo"/>
+        <rosparam param="odom0_config">[ true,  true,  true,
+                                        false, false, false,
+                                         true,  true,  true,
+                                         true,  true,  true,
+                                        false, false, false]</rosparam>
+        <param name="odom0_differential" value="true"/>
+        <param name="odom0_relative" value="true"/>
+
+        <param name="odom1" value="/rover/localization/wo"/>
+        <rosparam param="odom1_config">[ true,  true,  true,
+                                        false, false, false,
+                                        false, false, false,
+                                        false, false, false,
+                                        false, false, false]</rosparam>
+        <param name="odom1_differential" value="false"/>
+        <param name="odom1_relative" value="true"/>
+
+        <param name="imu0" value="/rover/localization/imu"/>
+        <rosparam param="imu0_config">[ false, false, false,
+                                        true,  true,  true,
+                                        false, false, false,
+                                        true,  true,  true,
+                                        true,  true,  true]</rosparam>
+        <param name="imu0_differential" value="false"/>
+        <param name="imu0_relative" value="false"/>
+        <param name="imu0_remove_gravitational_acceleration" value="false"/>
+
+        <param name="print_diagnostics" value="true"/>
+    </node>
+
+</launch>
