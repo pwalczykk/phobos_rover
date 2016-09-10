@@ -1,0 +1,12 @@
+int8 m1temp
+int8 p1temp
+int8 m2temp
+int8 p2temp
+int8 m3temp
+int8 p3temp
+int8 m4temp
+int8 p4temp
+int8 m5temp
+int8 p5temp
+int8 m6temp
+int8 p6temp

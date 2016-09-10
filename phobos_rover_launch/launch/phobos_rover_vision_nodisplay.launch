@@ -1,6 +1,4 @@
 <launch>
-    <node name="web_video_server"       pkg="web_video_server"      type="web_video_server" ns="/rover" output="screen"/>
-
     <node name="camera1_tf_broadcaster" pkg="phobos_rover_vision" type="tf_broadcaster" ns="/rover">
         <param name="parent_link" value="base_link"/>
         <param name="child_link" value="camera1_lens"/>
@@ -47,36 +45,5 @@
         <param name="publish_tf" value="false"/>
     </node>
 
-    <node name="display_image_1" pkg="phobos_rover_vision" type="display_image" ns="rover">
-        <param name="camera_name" value="camera1"/>
-        <param name="width" value="400"/>
-        <param name="height" value="300"/>
-        <param name="x" value="0"/>
-        <param name="y" value="0"/>
-    </node>
-
-    <node name="display_image_2" pkg="phobos_rover_vision" type="display_image" ns="rover">
-        <param name="camera_name" value="camera2"/>
-        <param name="width" value="400"/>
-        <param name="height" value="300"/>
-        <param name="x" value="400"/>
-        <param name="y" value="0"/>
-    </node>
-
-    <node name="display_image_3" pkg="phobos_rover_vision" type="display_image" ns="rover">
-        <param name="camera_name" value="camera3"/>
-        <param name="width" value="320"/>
-        <param name="height" value="240"/>
-        <param name="x" value="0"/>
-        <param name="y" value="300"/>
-    </node>
-
-    <node name="display_image_4" pkg="phobos_rover_vision" type="display_image" ns="rover">
-        <param name="camera_name" value="camera4"/>
-        <param name="width" value="400"/>
-        <param name="height" value="300"/>
-        <param name="x" value="400"/>
-        <param name="y" value="300"/>
-    </node>
 
 </launch>
