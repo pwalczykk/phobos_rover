@@ -7,9 +7,10 @@ project(spi_motor_transceiver)
 find_package(catkin REQUIRED COMPONENTS
     roscpp
     message_generation
+    phobos_shared
 )
 
-include_directories(${catkin_INCLUDE_DIRS} ${roscpp_INCLUDE_DIRS})
+include_directories(${catkin_INCLUDE_DIRS} ${roscpp_INCLUDE_DIRS} ${phobos_shared_INCLUDE_DIRS})
 
 add_message_files(
     FILES
@@ -23,7 +24,7 @@ generate_messages(
 )
 
 catkin_package(
-    CATKIN_DEPENDS message_runtime
+    CATKIN_DEPENDS message_runtime phobos_shared
 )
 
 

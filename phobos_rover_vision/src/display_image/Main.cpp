@@ -19,7 +19,7 @@ int main(int argc, char** argv){
     nh.param("x", x, 10);
     nh.param("y", y, 10);
 
-    ImageWindow iw(&nh, &it, "/rover/" + camera_name + "/image", camera_name);
+    ImageWindow iw(&nh, &it, camera_name + "/image_raw", camera_name);
     iw.ResizeWindow(width, height);
     iw.MoveWindow(x, y);
 

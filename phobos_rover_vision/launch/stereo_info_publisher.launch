@@ -1,0 +1,93 @@
+<launch>
+    <node name="stereo_info_publisher" pkg="phobos_rover_vision" type="cam_info_publisher2" output="screen">
+
+                <remap from="/rover/camera1/image2" to="/rover/left/image_raw"/>
+                <remap from="/rover/camera1/camera_info" to="/rover/left/camera_info"/>
+                <remap from="/rover/camera2/image2" to="/rover/right/image_raw"/>
+                <remap from="/rover/camera2/camera_info" to="/rover/right/camera_info"/>
+
+                <param name="camera_name1" value="camera1"/>
+                <param name="camera_name2" value="camera2"/>
+
+                <!-- <param name="/cam1_D0" value="357.32858564951226"/>
+                <param name="/cam1_D1" value="0.0"/>
+                <param name="/cam1_D2" value="136.03481086853375"/>
+                <param name="/cam1_D3" value="0.0"/>
+                <param name="/cam1_D4" value="358.47898142356405"/>
+                <param name="/cam1_D5" value="126.72667023221376"/> -->
+
+                <param name="/cam1_K0" value="357.32858564951226"/>
+                <param name="/cam1_K1" value="0.0"/>
+                <param name="/cam1_K2" value="136.03481086853375"/>
+                <param name="/cam1_K3" value="0.0"/>
+                <param name="/cam1_K4" value="358.47898142356405"/>
+                <param name="/cam1_K5" value="126.72667023221376"/>
+                <param name="/cam1_K6" value="0.0"/>
+                <param name="/cam1_K7" value="0.0"/>
+                <param name="/cam1_K8" value="1.0"/>
+
+                <param name="/cam1_R0" value="0.998757407024752"/>
+                <param name="/cam1_R1" value="0.01744812371576829"/>
+                <param name="/cam1_R2" value="0.04668195467194254"/>
+                <param name="/cam1_R3" value="-0.0193275651131292"/>
+                <param name="/cam1_R4" value="0.9990080499809664"/>
+                <param name="/cam1_R5" value="0.040116845589163876"/>
+                <param name="/cam1_R6" value="-0.04593568482119103"/>
+                <param name="/cam1_R7" value="-0.0409692451971758"/>
+                <param name="/cam1_R8" value="0.9981039193430621"/>
+
+                <param name="/cam1_P0" value="413.54388262619034"/>
+                <param name="/cam1_P1" value="0.0"/>
+                <param name="/cam1_P2" value="125.97761726379395"/>
+                <param name="/cam1_P3" value="0.0"/>
+                <param name="/cam1_P4" value="0.0"/>
+                <param name="/cam1_P5" value="413.54388262619034"/>
+                <param name="/cam1_P6" value="115.01652145385742"/>
+                <param name="/cam1_P7" value="0.0"/>
+                <param name="/cam1_P8" value="0.0"/>
+                <param name="/cam1_P9" value="0.0"/>
+                <param name="/cam1_P10" value="1.0"/>
+                <param name="/cam1_P11" value="0.0"/>
+
+                <!-- <param name="/cam2_D0" value="357.32858564951226"/>
+                <param name="/cam2_D1" value="0.0"/>
+                <param name="/cam2_D2" value="136.03481086853375"/>
+                <param name="/cam2_D3" value="0.0"/>
+                <param name="/cam2_D4" value="358.47898142356405"/>
+                <param name="/cam2_D5" value="126.72667023221376"/> -->
+
+                <param name="/cam2_K0" value="357.8272570035106"/>
+                <param name="/cam2_K1" value="0.0"/>
+                <param name="/cam2_K2" value="146.05622395992833"/>
+                <param name="/cam2_K3" value="0.0"/>
+                <param name="/cam2_K4" value="358.76571634435965"/>
+                <param name="/cam2_K5" value="100.42384224460946"/>
+                <param name="/cam2_K6" value="0.0"/>
+                <param name="/cam2_K7" value="0.0"/>
+                <param name="/cam2_K8" value="1.0"/>
+
+                <param name="/cam2_R0" value="0.9979049633606214"/>
+                <param name="/cam2_R1" value="0.057267020027447435"/>
+                <param name="/cam2_R2" value="0.0301026995037475"/>
+                <param name="/cam2_R3" value="-0.05599838172521475"/>
+                <param name="/cam2_R4" value="0.9975713068251635"/>
+                <param name="/cam2_R5" value="-0.0414206354766882"/>
+                <param name="/cam2_R6" value="-0.03240162564431165"/>
+                <param name="/cam2_R7" value="0.0396481552699679"/>
+                <param name="/cam2_R8" value="0.9986882188347345"/>
+
+                <param name="/cam2_P0" value="413.54388262619034"/>
+                <param name="/cam2_P1" value="0.0"/>
+                <param name="/cam2_P2" value="125.97761726379395"/>
+                <param name="/cam2_P3" value="45.89584385909208"/>
+                <param name="/cam2_P4" value="0.0"/>
+                <param name="/cam2_P5" value="413.54388262619034"/>
+                <param name="/cam2_P6" value="115.01652145385742"/>s
+                <param name="/cam2_P7" value="0.0"/>
+                <param name="/cam2_P8" value="0.0"/>
+                <param name="/cam2_P9" value="0.0"/>
+                <param name="/cam2_P10" value="1.0"/>
+                <param name="/cam2_P11" value="0.0"/>
+
+    </node>
+</launch>

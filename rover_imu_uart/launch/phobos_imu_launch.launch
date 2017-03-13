@@ -1,0 +1,10 @@
+<launch>
+
+<node name="phobos_imu_receiver" pkg="rover_imu_uart" type="uart_imu_receiver" respawn="true">
+</node>
+
+<node name="imu_complementary_filter" pkg="imu_complementary_filter" type="complementary_filter_node">
+<remap from="/imu/data" to="/rover/localization/imu"/>
+</node>
+
+</launch>

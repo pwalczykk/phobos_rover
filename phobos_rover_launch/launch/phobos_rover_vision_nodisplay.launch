@@ -3,7 +3,8 @@
         <param name="parent_link" value="base_link"/>
         <param name="child_link" value="camera1_lens"/>
         <param name="pose_x" value =" 0.265"/>
-        <param name="pose_y" value =" 0.035"/>
+        <!-- <param name="pose_y" value =" 0.035"/> -->
+        <param name="pose_y" value =" 0.050"/>
         <param name="pose_z" value ="-0.070"/>
         <param name="orient_x" value ="-0.5"/>
         <param name="orient_y" value =" 0.5"/>

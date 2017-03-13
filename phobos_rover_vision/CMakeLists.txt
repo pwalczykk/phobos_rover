@@ -38,3 +38,7 @@ target_link_libraries(cameras_synchronizer ${catkin_LIBRARIES})
 add_executable(cam_info_publisher
     src/cam_info_publisher/Main.cpp)
 target_link_libraries(cam_info_publisher ${catkin_LIBRARIES})
+
+add_executable(cam_info_publisher2
+    src/cam_info_publisher2/Main.cpp)
+target_link_libraries(cam_info_publisher2 ${catkin_LIBRARIES})

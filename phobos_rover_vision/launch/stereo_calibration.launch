@@ -1,0 +1,10 @@
+<launch>
+    <include filename="stereo_info_publisher.launch"/>
+    <node name="cameracalibration" pkg="camera_calibration" type="cameracalibrator.py"
+        args="
+            --size 9x6
+            --square 0.36
+            left:=/rover/camera1/image
+            right:=/rover/camera2/image
+    "/>
+</launch>

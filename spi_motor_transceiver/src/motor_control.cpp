@@ -5,6 +5,7 @@
 #include "ros/ros.h"
 #include "std_msgs/Int8.h"
 #include "std_msgs/UInt8.h"
+#include "std_msgs/UInt16.h"
 #include <phobos_shared/ArmVel16.h>
 #include <phobos_shared/WheelsVel16.h>
 #include <phobos_shared/EncodersRockerBogie.h>
@@ -116,7 +117,7 @@ void setMotorsGetEncoders(const phobos_shared::WheelsVel16::ConstPtr& msg) {
     data.wheel_vel_fr = e4;
     data.wheel_vel_mr = e5;
     data.wheel_vel_br = e6;
-    std_msgs::UInt8 sdata;
+    std_msgs::UInt16 sdata;
     sdata.data = eS;
 
     // Debug - print data
@@ -432,6 +433,30 @@ void setPIDs(const phobos_shared::WheelsPID::ConstPtr& msg) {
 }
 
 
+void switchToPWM(const std_msgs::Int8::ConstPtr& msg) {
+    // Get values
+    uint8_t r = msg->data;
+
+    // Calculate CRC
+    uint8_t CRC = (0x0C ^ 0x4D ^ 0x66 ^ r);
+
+    // Transmit & receive buffer (Part 1)
+    uint8_t txBuffer1[18] = {0x73, 0x0C, 0x4D, 0x68, r, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, CRC, 0x65};
+    uint8_t rxBuffer1[18] = {0,};
+
+    // Send command
+    spi_master.WriteData(txBuffer1,rxBuffer1, 18);
+
+    // Wait for command processing
+    wait_command();
+
+    // Read response (2)
+    uint8_t txBuffer2[20] = {0,};
+    uint8_t rxBuffer2[20] = {0,};
+    spi_master.WriteData(txBuffer2,rxBuffer2, 20);
+}
+
+
 int main(int argc, char** argv)
 {
     // Open SPI bus
@@ -454,12 +479,13 @@ int main(int argc, char** argv)
     // Arm calibrate & subsystem reset
     ros::Subscriber armCalibrate = n.subscribe("/rover/other/arm_calibrate", 1000, calibrateArm);
     ros::Subscriber subReset = n.subscribe("/rover/other/subsystem_reset", 1000, resetSubsystem);
+    ros::Subscriber switchPWMsub = n.subscribe("/rover/other/switch_to_pwm", 1000, switchToPWM);
     // Rocker-bogie encoders
     rockerBogieEncoders = n.advertise<phobos_shared::EncodersRockerBogie>("/rover/encoders/rocker_bogie_absolute", 1000);
     // Wheel motors PIDs
     ros::Subscriber wheelPIDs = n.subscribe("/rover/control/wheels_pid", 1000, setPIDs);
     // Controller status byte
-    wheelsStatus = n.advertise<std_msgs::UInt8>("/rover/other/wheels_driver_status", 1000);
+    wheelsStatus = n.advertise<std_msgs::UInt16>("/rover/other/wheels_driver_status", 1000);
     armStatus = n.advertise<std_msgs::UInt8>("/rover/other/arm_driver_status", 1000);
 
     // Main loop
@@ -496,4 +522,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-

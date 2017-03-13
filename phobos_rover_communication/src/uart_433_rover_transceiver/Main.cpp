@@ -94,12 +94,12 @@ int main(int argc, char** argv){
                         pub_ctrl.msg.data = rx_arm.FRAME.header.ctrl;
                         pub_ctrl.Publish();
 
-                        pub_arm.msg.link_0 = conv::link0_sig.FromRx(rx_arm.FRAME.link_0);
-                        pub_arm.msg.link_1 = conv::link1_sig.FromRx(rx_arm.FRAME.link_1);
-                        pub_arm.msg.link_2 = conv::link2_sig.FromRx(rx_arm.FRAME.link_2);
-                        pub_arm.msg.link_3 = conv::link3_sig.FromRx(rx_arm.FRAME.link_3);
-                        pub_arm.msg.link_4 = conv::link4_sig.FromRx(rx_arm.FRAME.link_4);
-                        pub_arm.msg.gripper = conv::grip_sig.FromRx(rx_arm.FRAME.grip);
+                        pub_arm.msg.link_0 = rx_arm.FRAME.link_0;
+                        pub_arm.msg.link_1 = rx_arm.FRAME.link_1;
+                        pub_arm.msg.link_2 = rx_arm.FRAME.link_2;
+                        pub_arm.msg.link_3 = rx_arm.FRAME.link_3;
+                        pub_arm.msg.link_4 = rx_arm.FRAME.link_4;
+                        pub_arm.msg.gripper = rx_arm.FRAME.grip;
                         pub_arm.Publish();
 
                         RECIVED_FIRST_DATA = 1; UART_SYNCHRO = 1; ERROR_COUNTER = 0;
